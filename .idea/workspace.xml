@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e49dccda-6c03-433f-926d-614ba383b5d1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Deporte.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Club.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Club.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Director.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Director.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Entrenador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Entrenador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Jugador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Jugador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Liga.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Persona.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Miembro.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +21,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "hana-bin"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="7434134c-dbdc-4dd7-a7ac-85cefe06d3ab" />
+        <option name="url" value="https://github.com/hana-bin/Practica10.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
