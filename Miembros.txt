@@ -1,0 +1,12 @@
+Carlos;Director;Team Dragon Blaze
+Laura;Director;Phoenix Flyers
+Andres;Director;Tiger Strikers
+Ana;Director;Lightning Smashers
+Pablo;Director;Thunder Twisters
+Marta;Director;Rising Phoenix
+Diego;Entrenador;Tiger Strikers
+Sofia;Entrenador;Team Dragon Blaze
+Javier;Entrenador;Thunder Twisters
+Valeria;Entrenador;Lightning Smashers
+Nicolas;Entrenador;Phoenix Flyers
+Elena;Entrenador;Rising Phoenix

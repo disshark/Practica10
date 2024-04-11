@@ -1,64 +1,57 @@
 package P2_Colaborativa_Equipo4_Herencia;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Club {
-	private String director;
-	private String entrenador;
-	private List<Jugador> jugadores = new ArrayList<>();
-	private String tpoDport;
-	private int valoracion;
-	private int ranking;
-	
-	public Club(String director, String entrenador, List<Jugador> jugadores, String tpoDport, int valoracion, int ranking) {
-		this.director = director;
-		this.entrenador = entrenador;
-		this.jugadores = jugadores;
-		this.tpoDport = tpoDport;
-		this.valoracion = valoracion;
-		this.ranking = ranking;
-	}
+    private int id;
+    private String nombre;
+    private ArrayList<Miembro> miembros = new ArrayList<>();
+    private String deporte;
+    private double valoracion;
+    private int ranking;
 
-	public int getValoracion() {
-		return valoracion;
-	}
+    public Club(int id, String nombre, ArrayList<Miembro> miembros, String deporte, double valoracion, int ranking) {
+        this.id = id;
+        this.nombre = nombre;
+        this.miembros = miembros;
+        this.deporte = deporte;
+        this.valoracion = valoracion;
+        this.ranking = ranking;
+    }
 
-	public void setValoracion(int valoracion) {
-		this.valoracion = valoracion;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public int getRanking() {
-		return ranking;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setRanking(int ranking) {
-		this.ranking = ranking;
-	}
+    public ArrayList<Miembro> getMiembros() {
+        return miembros;
+    }
 
-	public String getTpoDport() {
-		return tpoDport;
-	}
+    public String getDeporte() {
+        return deporte;
+    }
 
-	public List<Jugador> getJugadores() {
-		return jugadores;
-	}
+    public double getValoracion() {
+        return valoracion;
+    }
 
-	public void setJugadores(List<Jugador> jugadores) {
-		this.jugadores = jugadores;
-	}
+    public int getRanking() {
+        return ranking;
+    }
 
-	public String getDirector() {
-		return director;
-	}
+    public void setMiembros(ArrayList<Miembro> miembros) {
+        this.miembros = miembros;
+    }
 
-	public String getEntrenador() {
-		return entrenador;
-	}
+    public void setValoracion(double valoracion) {
+        this.valoracion = valoracion;
+    }
 
-	public void setTpoDport(String tpoDport) {
-		this.tpoDport = tpoDport;
-	}
-	
-	
+    public void setRanking(int ranking) {
+        this.ranking = ranking;
+    }
 }
