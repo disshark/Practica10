@@ -11,16 +11,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-    private static List<String> clubes = new ArrayList<>();
+    private static List<Club> clubes = new ArrayList<>();
     public static List<Miembro> miembros = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         cargarMiembros("Miembros.txt");
-        miembros = Club.cargarClubes()
+        clubes = Club.cargarClubes("Club.txt", miembros);
         miembros.forEach(miembro -> {
             System.out.println(miembro.getNombre()+" "+miembro.getCargo());
         });
 
+        clubes.forEach(c -> {
+            System.out.println(c.getNombre());
+        });
 
     }
 
