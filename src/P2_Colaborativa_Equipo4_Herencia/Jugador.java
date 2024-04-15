@@ -62,4 +62,8 @@ public class Jugador extends Miembro{
     public void  anotarTantos(int tantos)  {
         this.tantos = tantos + 1;
     }
+
+    public static int calcularValor(int tantos, int sanciones) {
+        return (tantos * 1000) - (sanciones * 500);
+    }
 }
