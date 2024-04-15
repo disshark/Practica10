@@ -2,6 +2,8 @@ package P2_Colaborativa_Equipo4_Herencia;
 
 import java.util.ArrayList;
 
+
+
 public class Club {
     private int id;
     private String nombre;
