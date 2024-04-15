@@ -55,4 +55,8 @@ public class Jugador extends Miembro{
     public void setValor(double valor) {
         this.valor = valor;
     }
+
+    public void recibirSanciones(int sanciones) {
+
+    }
 }
