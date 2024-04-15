@@ -1,5 +1,6 @@
 package P2_Colaborativa_Equipo4_Herencia;
 
+import java.awt.*;
 import java.io.BufferedReader;
 
 
@@ -9,21 +10,34 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     private static List<Club> clubes = new ArrayList<>();
     public static List<Miembro> miembros = new ArrayList<>();
+    private static Scanner scanner = new  Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
         cargarMiembros("Miembros.txt");
         clubes = Club.cargarClubes("Club.txt", miembros);
-        miembros.forEach(miembro -> {
-            System.out.println(miembro.getNombre()+" "+miembro.getCargo());
-        });
+        boolean salir = false;
+        while (!salir) {
+            System.out.println("Elige el equipo que desees");
+            clubes.forEach(c -> {
+                System.out.println(c.getNombre());
+            });
+            String nombrEquipo = scanner.nextLine();
 
-        clubes.forEach(c -> {
-            System.out.println(c.getNombre());
-        });
+            if (clubes.stream().anyMatch(c -> c.getNombre().equalsIgnoreCase(nombrEquipo))) {
+                salir = true;
+
+                verDtsEquipo(nombrEquipo);
+
+            } else {
+                System.out.println("No existe el equipo");
+            }
+
+        }
 
     }
 
@@ -51,5 +65,12 @@ public class Main {
             }
         }
         br.close();
+    }
+
+    public  static void verDtsEquipo(String nombrEquipo){
+        clubes.stream().filter(c -> c.getNombre().equalsIgnoreCase(nombrEquipo)).forEach(e -> {
+            System.out.println("Valoracion: " + e.getValoracion());
+            e.getMiembros().stream().filter(m -> m.getCargo().equalsIgnoreCase("Director")).forEach(a -> System.out.println("Director: "+ a.getNombre()));
+        });
     }
 }
