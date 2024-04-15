@@ -8,5 +8,5 @@ Diego;Entrenador;Tiger Strikers
 Sofia;Entrenador;Team Dragon Blaze
 Javier;Entrenador;Thunder Twisters
 Valeria;Entrenador;Lightning Smashers
-Nicolas;Entrenador;Phoenix Flyers
+Nicolas;Entrenador;Lightning Thunders
 Elena;Entrenador;Rising Phoenix

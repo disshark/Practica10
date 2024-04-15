@@ -57,6 +57,9 @@ public class Jugador extends Miembro{
     }
 
     public void recibirSanciones(int sanciones) {
-
+        this.sanciones = sanciones + 1;
+    }
+    public void  anotarTantos(int tantos)  {
+        this.tantos = tantos + 1;
     }
 }
