@@ -1,12 +1,6 @@
 Sepak Takraw;Team Dragon Blaze
-voleibol;Phoenix Flyers
 Sepak Takraw;Tiger Strikers
-Rugby Subacuatico;Lightning Smashers
-Sepak Takraw;Thunder Twisters
-voleibol;Rising Phoenix
-Sepak Takraw;Tiger Strikers
-Rugby Subacuatico;Team Dragon Blaze
-voleibol;Thunder Twisters
-Rugby Subacuatico;Lightning Smashers
-voleibol;Lightning Thunders
-Rugby Subacuatico;Rising Phoenix
+Voleibol;Phoenix Flyers
+Voleibol;Lightning Smashers
+Rugby Subacuatico;Thunder Twisters
+Rugby Subacuático;Rising Phoenix
