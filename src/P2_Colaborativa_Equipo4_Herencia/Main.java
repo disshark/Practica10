@@ -22,10 +22,11 @@ public class Main {
         clubes = Club.cargarClubes("Club.txt", miembros);
         boolean salir = false;
         while (!salir) {
-            System.out.println("Elige el equipo que desees");
             clubes.forEach(c -> {
                 System.out.println(c.getNombre());
             });
+            System.out.println("--------------------------");
+            System.out.println("Elige el equipo que desees: ");
             String nombrEquipo = scanner.nextLine();
 
             if (clubes.stream().anyMatch(c -> c.getNombre().equalsIgnoreCase(nombrEquipo))) {
@@ -38,6 +39,7 @@ public class Main {
             }
 
         }
+        sancionar();
 
     }
 
@@ -67,10 +69,29 @@ public class Main {
         br.close();
     }
 
+    public static void sancionar() {
+        System.out.println("¿Que jugador va a recivir las sanciones?");
+        String jugador = scanner.nextLine();
+        System.out.println("Sanciones a aplicar: ");
+        int cantSanciones = scanner.nextInt();
+        clubes.stream().forEach(c -> {
+            c.getMiembros().stream().filter(m -> m.getNombre().equalsIgnoreCase(jugador)).forEach(mi -> {
+                Jugador j = (Jugador) mi;
+                j.setSanciones(j.getSanciones() + cantSanciones);
+            });
+        });
+    }
+
     public  static void verDtsEquipo(String nombrEquipo){
         clubes.stream().filter(c -> c.getNombre().equalsIgnoreCase(nombrEquipo)).forEach(e -> {
             System.out.println("Valoracion: " + e.getValoracion());
             e.getMiembros().stream().filter(m -> m.getCargo().equalsIgnoreCase("Director")).forEach(a -> System.out.println("Director: "+ a.getNombre()));
+            e.getMiembros().stream().filter(en -> en.getCargo().equalsIgnoreCase("entrenador")).forEach(et -> System.out.println("Entrenador: " + et.getNombre()));
+            System.out.println("--------------------");
+            System.out.println("\tJUGADORES");
+            System.out.println("--------------------");
+            e.getMiembros().stream().filter(j -> j.getCargo().equalsIgnoreCase("jugador")).forEach(jg -> System.out.println(jg.getNombre()));
+            System.out.println("Deporte: " + e.getDeporte());
         });
     }
 }
