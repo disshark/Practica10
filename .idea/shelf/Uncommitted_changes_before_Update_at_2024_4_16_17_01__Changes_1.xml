@@ -1,0 +1,29 @@
+<changelist name="Uncommitted_changes_before_Update_at_2024_4_16_17_01_[Changes]1" date="1713279702843" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024_4_16_17_01_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2024/4/16 17:01 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Entrenador.class" />
+    <option name="AFTER_PATH" value="out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Entrenador.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024_4_16_17_01_[Changes]1/Entrenador.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Main.class" />
+    <option name="AFTER_PATH" value="out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Main.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024_4_16_17_01_[Changes]1/Main.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Jugador.class" />
+    <option name="AFTER_PATH" value="out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Jugador.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024_4_16_17_01_[Changes]1/Jugador.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Club.class" />
+    <option name="AFTER_PATH" value="out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Club.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024_4_16_17_01_[Changes]1/Club.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Deporte.class" />
+    <option name="AFTER_PATH" value="out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Deporte.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024_4_16_17_01_[Changes]1/Deporte.class" />
+  </binary>
+</changelist>

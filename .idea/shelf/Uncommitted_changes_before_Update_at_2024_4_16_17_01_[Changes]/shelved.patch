@@ -1,0 +1,342 @@
+Index: src/P2_Colaborativa_Equipo4_Herencia/Club.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package P2_Colaborativa_Equipo4_Herencia;\r\n\r\nimport java.io.BufferedReader;\r\nimport java.io.FileNotFoundException;\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\nimport java.lang.reflect.Array;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\n//Asd\r\n\r\npublic class Club {\r\n    private String nombre;\r\n    private ArrayList<Miembro> miembros = new ArrayList<>();\r\n    private String deporte;\r\n    private double valoracion;\r\n    private int ranking;\r\n\r\n    public Club(String nombre, ArrayList<Miembro> miembros, String deporte, double valoracion, int ranking) {\r\n        this.nombre = nombre;\r\n        this.miembros = miembros;\r\n        this.deporte = deporte;\r\n        this.valoracion = valoracion;\r\n        this.ranking = ranking;\r\n    }\r\n\r\n    public String getNombre() {\r\n        return nombre;\r\n    }\r\n\r\n    public ArrayList<Miembro> getMiembros() {\r\n        return miembros;\r\n    }\r\n\r\n    public String getDeporte() {\r\n        return deporte;\r\n    }\r\n\r\n    public double getValoracion() {\r\n        return valoracion;\r\n    }\r\n\r\n    public int getRanking() {\r\n        return ranking;\r\n    }\r\n\r\n    public void setMiembros(ArrayList<Miembro> miembros) {\r\n        this.miembros = miembros;\r\n    }\r\n\r\n    public void setValoracion(double valoracion) {\r\n        this.valoracion = valoracion;\r\n    }\r\n\r\n    public void setRanking(int ranking) {\r\n        this.ranking = ranking;\r\n    }\r\n\r\n    public static ArrayList<Club> cargarClubes(String fichero, List<Miembro> miembros) throws IOException {\r\n        ArrayList<Club> clubes = new ArrayList<>();\r\n        BufferedReader br = new BufferedReader(new FileReader(fichero));\r\n        String line;\r\n        while((line = br.readLine()) != null) {\r\n            String[] datos = line.split(\";\");\r\n            clubes.add(new Club(datos[1], miembrosEquipo(miembros, datos[1]), datos[0], valoracionEquipo(miembrosEquipo(miembros, datos[1])), Integer.parseInt(datos[2])));\r\n        }\r\n        br.close();\r\n        return clubes;\r\n    }\r\n\r\n    public static ArrayList<Miembro> miembrosEquipo(List<Miembro> miembros, String equipo) {\r\n        ArrayList<Miembro> miembrosEquipo = new ArrayList<>();\r\n        for(Miembro m : miembros) {\r\n            if(m.getEquipo().equalsIgnoreCase(equipo)) {\r\n                miembrosEquipo.add(m);\r\n            }\r\n        }\r\n        return miembrosEquipo;\r\n    }\r\n\r\n    public static double valoracionEquipo(ArrayList<Miembro> miembros) {\r\n        return miembros.stream().filter(m -> m.getCargo().equalsIgnoreCase(\"jugador\")).mapToDouble(m -> ((Jugador) m).getValor()).sum();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/P2_Colaborativa_Equipo4_Herencia/Club.java b/src/P2_Colaborativa_Equipo4_Herencia/Club.java
+--- a/src/P2_Colaborativa_Equipo4_Herencia/Club.java	(revision 31271e68a4341e55ce0671929defc969fc835847)
++++ b/src/P2_Colaborativa_Equipo4_Herencia/Club.java	(date 1713275320644)
+@@ -6,18 +6,24 @@
+ import java.io.IOException;
+ import java.lang.reflect.Array;
+ import java.util.ArrayList;
++import java.util.Arrays;
+ import java.util.List;
+ 
+ //Asd
+ 
+ public class Club {
++    public static List<Deporte> deportes = new ArrayList<>(Arrays.asList(
++            new Deporte("Sepak Takraw", 3),
++            new Deporte("Voleibol", 6),
++            new Deporte("Rugby Subacuatico", 11)
++    ));
+     private String nombre;
+     private ArrayList<Miembro> miembros = new ArrayList<>();
+-    private String deporte;
++    private Deporte deporte;
+     private double valoracion;
+     private int ranking;
+ 
+-    public Club(String nombre, ArrayList<Miembro> miembros, String deporte, double valoracion, int ranking) {
++    public Club(String nombre, ArrayList<Miembro> miembros, Deporte deporte, double valoracion, int ranking) {
+         this.nombre = nombre;
+         this.miembros = miembros;
+         this.deporte = deporte;
+@@ -33,7 +39,7 @@
+         return miembros;
+     }
+ 
+-    public String getDeporte() {
++    public Deporte getDeporte() {
+         return deporte;
+     }
+ 
+@@ -63,7 +69,7 @@
+         String line;
+         while((line = br.readLine()) != null) {
+             String[] datos = line.split(";");
+-            clubes.add(new Club(datos[1], miembrosEquipo(miembros, datos[1]), datos[0], valoracionEquipo(miembrosEquipo(miembros, datos[1])), Integer.parseInt(datos[2])));
++            clubes.add(new Club(datos[1], miembrosEquipo(miembros, datos[1]), buscarDeporte(datos[0]), valoracionEquipo(miembrosEquipo(miembros, datos[1])), Integer.parseInt(datos[2])));
+         }
+         br.close();
+         return clubes;
+@@ -82,4 +88,13 @@
+     public static double valoracionEquipo(ArrayList<Miembro> miembros) {
+         return miembros.stream().filter(m -> m.getCargo().equalsIgnoreCase("jugador")).mapToDouble(m -> ((Jugador) m).getValor()).sum();
+     }
++
++    public static Deporte buscarDeporte(String deporte) {
++        for(Deporte d : deportes) {
++            if(deporte.equalsIgnoreCase(d.getNombre())) {
++                return d;
++            }
++        }
++        return null;
++    }
+ }
+Index: src/P2_Colaborativa_Equipo4_Herencia/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package P2_Colaborativa_Equipo4_Herencia;\r\n\r\nimport java.awt.*;\r\nimport java.io.BufferedReader;\r\n\r\n\r\nimport java.io.File;\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.Arrays;\r\nimport java.util.List;\r\nimport java.util.Scanner;\r\n\r\npublic class Main {\r\n    private static List<Club> clubes = new ArrayList<>();\r\n    public static List<Miembro> miembros = new ArrayList<>();\r\n    private static Scanner scanner = new  Scanner(System.in);\r\n\r\n    public static void main(String[] args) throws IOException {\r\n        cargarMiembros(\"Miembros.txt\");\r\n        clubes = Club.cargarClubes(\"Club.txt\", miembros);\r\n        boolean salir = false;\r\n        while (!salir) {\r\n            System.out.println(\"Elige el equipo que desees\");\r\n            clubes.forEach(c -> {\r\n                System.out.println(c.getNombre());\r\n            });\r\n            String nombrEquipo = scanner.nextLine();\r\n\r\n            if (clubes.stream().anyMatch(c -> c.getNombre().equalsIgnoreCase(nombrEquipo))) {\r\n                salir = true;\r\n\r\n                verDtsEquipo(nombrEquipo);\r\n\r\n            } else {\r\n                System.out.println(\"No existe el equipo\");\r\n            }\r\n\r\n        }\r\n\r\n    }\r\n\r\n    public  static void cargarDts() throws IOException {\r\n        BufferedReader br = new BufferedReader(new FileReader(new File(\"NavesLigas.txt\")));\r\n        String line = \"\";\r\n        while ((line = br.readLine()) != null) {\r\n            String[] values = line.split(\";\");\r\n\r\n        }\r\n        br.close();\r\n    }\r\n\r\n    public static void cargarMiembros(String fichero) throws IOException {\r\n        BufferedReader br = new BufferedReader(new FileReader(fichero));\r\n        String line;\r\n        while ((line = br.readLine()) != null) {\r\n            String[] datos = line.split(\";\");\r\n            if(datos[1].equalsIgnoreCase(\"jugador\")) {\r\n                miembros.add(new Jugador(datos[0], datos[1], datos[7], Integer.parseInt(datos[2]), datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), Double.parseDouble(datos[6])));\r\n            } else if(datos[1].equalsIgnoreCase(\"entrenador\")) {\r\n                miembros.add(new Entrenador(datos[0], datos[1], datos[2]));\r\n            } else if(datos[1].equalsIgnoreCase(\"director\")) {\r\n                miembros.add(new Director(datos[0], datos[1], datos[2]));\r\n            }\r\n        }\r\n        br.close();\r\n    }\r\n\r\n    public  static void verDtsEquipo(String nombrEquipo){\r\n        clubes.stream().filter(c -> c.getNombre().equalsIgnoreCase(nombrEquipo)).forEach(e -> {\r\n            System.out.println(\"Valoracion: \" + e.getValoracion());\r\n            e.getMiembros().stream().filter(m -> m.getCargo().equalsIgnoreCase(\"Director\")).forEach(a -> System.out.println(\"Director: \"+ a.getNombre()));\r\n        });\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/P2_Colaborativa_Equipo4_Herencia/Main.java b/src/P2_Colaborativa_Equipo4_Herencia/Main.java
+--- a/src/P2_Colaborativa_Equipo4_Herencia/Main.java	(revision 31271e68a4341e55ce0671929defc969fc835847)
++++ b/src/P2_Colaborativa_Equipo4_Herencia/Main.java	(date 1713279676659)
+@@ -7,14 +7,14 @@
+ import java.io.File;
+ import java.io.FileReader;
+ import java.io.IOException;
+-import java.util.ArrayList;
+-import java.util.Arrays;
++import java.util.*;
+ import java.util.List;
+-import java.util.Scanner;
++import java.util.stream.Collectors;
+ 
+ public class Main {
+     private static List<Club> clubes = new ArrayList<>();
+     public static List<Miembro> miembros = new ArrayList<>();
++
+     private static Scanner scanner = new  Scanner(System.in);
+ 
+     public static void main(String[] args) throws IOException {
+@@ -32,6 +32,7 @@
+                 salir = true;
+ 
+                 verDtsEquipo(nombrEquipo);
++                jugadorConvocado(nombrEquipo);
+ 
+             } else {
+                 System.out.println("No existe el equipo");
+@@ -39,6 +40,7 @@
+ 
+         }
+ 
++
+     }
+ 
+     public  static void cargarDts() throws IOException {
+@@ -57,7 +59,7 @@
+         while ((line = br.readLine()) != null) {
+             String[] datos = line.split(";");
+             if(datos[1].equalsIgnoreCase("jugador")) {
+-                miembros.add(new Jugador(datos[0], datos[1], datos[7], Integer.parseInt(datos[2]), datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), Double.parseDouble(datos[6])));
++                miembros.add(new Jugador(datos[0], datos[1], datos[7], Integer.parseInt(datos[2]), datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), Integer.parseInt(datos[6])));
+             } else if(datos[1].equalsIgnoreCase("entrenador")) {
+                 miembros.add(new Entrenador(datos[0], datos[1], datos[2]));
+             } else if(datos[1].equalsIgnoreCase("director")) {
+@@ -67,10 +69,36 @@
+         br.close();
+     }
+ 
+-    public  static void verDtsEquipo(String nombrEquipo){
++    public static void verDtsEquipo(String nombrEquipo){
+         clubes.stream().filter(c -> c.getNombre().equalsIgnoreCase(nombrEquipo)).forEach(e -> {
+             System.out.println("Valoracion: " + e.getValoracion());
+             e.getMiembros().stream().filter(m -> m.getCargo().equalsIgnoreCase("Director")).forEach(a -> System.out.println("Director: "+ a.getNombre()));
+         });
+     }
++
++    public static void jugadorConvocado(String equipo) {
++
++        int numJugadores = 0;
++        for(Club c : clubes) {
++            if(c.getNombre().equalsIgnoreCase(equipo)) {
++                numJugadores = c.getDeporte().getNumJugador();
++            }
++        }
++        List<Miembro> miembrosOrdenados = ordenarMiembros(equipo);
++        System.out.println("Jugadores convocados:");
++        for(int i = 0; i < numJugadores; i++) {
++            System.out.println("\t-"+miembrosOrdenados.get(i).getNombre());
++        }
++    }
++
++    public static ArrayList<Miembro> ordenarMiembros(String equipo) {
++
++        List<Miembro> miembrosOrdenados = miembros.stream()
++                .filter(m -> m.getEquipo().equalsIgnoreCase(equipo))
++                .filter(m -> m.getCargo().equalsIgnoreCase("Jugador"))
++                .sorted(Comparator.comparingInt(m -> ((Jugador) m).getValor()).reversed()) // Ordenar de mayor a menor por valor
++                .collect(Collectors.toList());  // Recolectar en una lista
++
++        return new ArrayList<>(miembrosOrdenados);
++    }
+ }
+Index: src/P2_Colaborativa_Equipo4_Herencia/Jugador.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package P2_Colaborativa_Equipo4_Herencia;\r\n\r\npublic class Jugador extends Miembro{\r\n    private int dorsal;\r\n    private String posicion;\r\n    private int tantos;\r\n    private int sanciones;\r\n    private double valor;\r\n\r\n    public Jugador(String nombre, String cargo, String equipo, int dorsal, String posicion, int tantos, int sanciones, double valor) {\r\n        super(nombre, cargo, equipo);\r\n        this.dorsal = dorsal;\r\n        this.posicion = posicion;\r\n        this.tantos = tantos;\r\n        this.sanciones = sanciones;\r\n        this.valor = valor;\r\n    }\r\n\r\n    public int getDorsal() {\r\n        return dorsal;\r\n    }\r\n\r\n    public void setDorsal(int dorsal) {\r\n        this.dorsal = dorsal;\r\n    }\r\n\r\n    public String getPosicion() {\r\n        return posicion;\r\n    }\r\n\r\n    public void setPosicion(String posicion) {\r\n        this.posicion = posicion;\r\n    }\r\n\r\n    public int getTantos() {\r\n        return tantos;\r\n    }\r\n\r\n    public void setTantos(int tantos) {\r\n        this.tantos = tantos;\r\n    }\r\n\r\n    public int getSanciones() {\r\n        return sanciones;\r\n    }\r\n\r\n    public void setSanciones(int sanciones) {\r\n        this.sanciones = sanciones;\r\n    }\r\n\r\n    public double getValor() {\r\n        return valor;\r\n    }\r\n\r\n    public void setValor(double valor) {\r\n        this.valor = valor;\r\n    }\r\n\r\n    public void recibirSanciones(int sanciones) {\r\n        this.sanciones = sanciones + 1;\r\n    }\r\n    public void  anotarTantos(int tantos)  {\r\n        this.tantos = tantos + 1;\r\n    }\r\n\r\n    public static int calcularValor(int tantos, int sanciones) {\r\n        return (tantos * 1000) - (sanciones * 500);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/P2_Colaborativa_Equipo4_Herencia/Jugador.java b/src/P2_Colaborativa_Equipo4_Herencia/Jugador.java
+--- a/src/P2_Colaborativa_Equipo4_Herencia/Jugador.java	(revision 31271e68a4341e55ce0671929defc969fc835847)
++++ b/src/P2_Colaborativa_Equipo4_Herencia/Jugador.java	(date 1713274730271)
+@@ -5,9 +5,9 @@
+     private String posicion;
+     private int tantos;
+     private int sanciones;
+-    private double valor;
++    private int valor;
+ 
+-    public Jugador(String nombre, String cargo, String equipo, int dorsal, String posicion, int tantos, int sanciones, double valor) {
++    public Jugador(String nombre, String cargo, String equipo, int dorsal, String posicion, int tantos, int sanciones, int valor) {
+         super(nombre, cargo, equipo);
+         this.dorsal = dorsal;
+         this.posicion = posicion;
+@@ -48,18 +48,18 @@
+         this.sanciones = sanciones;
+     }
+ 
+-    public double getValor() {
++    public int getValor() {
+         return valor;
+     }
+ 
+-    public void setValor(double valor) {
++    public void setValor(int valor) {
+         this.valor = valor;
+     }
+ 
+     public void recibirSanciones(int sanciones) {
+         this.sanciones = sanciones + 1;
+     }
+-    public void  anotarTantos(int tantos)  {
++    public void anotarTantos(int tantos)  {
+         this.tantos = tantos + 1;
+     }
+ 
+Index: src/P2_Colaborativa_Equipo4_Herencia/Deporte.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package P2_Colaborativa_Equipo4_Herencia;\r\n\r\npublic class Deporte {\r\n    private String nombre;\r\n    private String numJugador;\r\n\r\n    public Deporte(String nombre, String numJugador) {\r\n        this.nombre = nombre;\r\n        this.numJugador = numJugador;\r\n    }\r\n\r\n    public String getNombre() {\r\n        return nombre;\r\n    }\r\n\r\n    public String getNumJugador() {\r\n        return numJugador;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/P2_Colaborativa_Equipo4_Herencia/Deporte.java b/src/P2_Colaborativa_Equipo4_Herencia/Deporte.java
+--- a/src/P2_Colaborativa_Equipo4_Herencia/Deporte.java	(revision 31271e68a4341e55ce0671929defc969fc835847)
++++ b/src/P2_Colaborativa_Equipo4_Herencia/Deporte.java	(date 1713274327144)
+@@ -2,9 +2,9 @@
+ 
+ public class Deporte {
+     private String nombre;
+-    private String numJugador;
++    private int numJugador;
+ 
+-    public Deporte(String nombre, String numJugador) {
++    public Deporte(String nombre, int numJugador) {
+         this.nombre = nombre;
+         this.numJugador = numJugador;
+     }
+@@ -13,7 +13,7 @@
+         return nombre;
+     }
+ 
+-    public String getNumJugador() {
++    public int getNumJugador() {
+         return numJugador;
+     }
+ }
+Index: src/P2_Colaborativa_Equipo4_Herencia/Entrenador.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package P2_Colaborativa_Equipo4_Herencia;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class Entrenador extends Miembro{\r\n    public Entrenador(String nombre, String cargo, String equipo) {\r\n        super(nombre, cargo, equipo);\r\n    }\r\n\r\n    public static ArrayList<Jugador> jugadorTitular() {\r\n        ArrayList<Jugador> jugadores = new ArrayList<>();\r\n\r\n\r\n        return jugadores;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/P2_Colaborativa_Equipo4_Herencia/Entrenador.java b/src/P2_Colaborativa_Equipo4_Herencia/Entrenador.java
+--- a/src/P2_Colaborativa_Equipo4_Herencia/Entrenador.java	(revision 31271e68a4341e55ce0671929defc969fc835847)
++++ b/src/P2_Colaborativa_Equipo4_Herencia/Entrenador.java	(date 1713275320648)
+@@ -7,10 +7,5 @@
+         super(nombre, cargo, equipo);
+     }
+ 
+-    public static ArrayList<Jugador> jugadorTitular() {
+-        ArrayList<Jugador> jugadores = new ArrayList<>();
+ 
+-
+-        return jugadores;
+-    }
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"3d002959-45c4-47b1-a337-5c6cc220f53a\" name=\"Changes\" comment=\"save\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Entrenador.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Entrenador.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 3\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2f9K1kTE9iBTeEJ4Uux6bQ12LlC\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.Main.executor\": \"Run\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/jwz17/Documents/IntelliJ/1/Practica10\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"jdk-20.0.2-corretto-20.0.2.1-4caba194b151-5bc9ecd2\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"3d002959-45c4-47b1-a337-5c6cc220f53a\" name=\"Changes\" comment=\"\" />\r\n      <created>1713207641090</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1713207641090</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"save\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1713208050378</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1713208050378</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"save\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"save\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 31271e68a4341e55ce0671929defc969fc835847)
++++ b/.idea/workspace.xml	(date 1713275320694)
+@@ -5,8 +5,13 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="3d002959-45c4-47b1-a337-5c6cc220f53a" name="Changes" comment="save">
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Club.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Club.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Deporte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Deporte.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Entrenador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Entrenador.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Jugador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Jugador.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Main.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -24,16 +29,16 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "Application.Main.executor": "Run",
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "git-widget-placeholder": "main",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "C:/Users/jwz17/Documents/IntelliJ/1/Practica10"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/jwz17/Documents/IntelliJ/1/Practica10&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="SharedIndexes">
+     <attachedChunks>
+       <set>
+@@ -58,7 +63,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1713208050378</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="save">
++      <option name="closed" value="true" />
++      <created>1713209772406</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1713209772406</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="VcsManagerConfiguration">
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_22\" default=\"true\" project-jdk-name=\"20\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 31271e68a4341e55ce0671929defc969fc835847)
++++ b/.idea/misc.xml	(date 1713209794268)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_22" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file

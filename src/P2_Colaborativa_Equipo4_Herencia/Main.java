@@ -73,7 +73,7 @@ public class Main {
         String jugador = scanner.nextLine();
         System.out.println("Sanciones a aplicar: ");
         int cantSanciones = scanner.nextInt();
-        clubes.stream().forEach(c -> {
+        clubes.forEach(c -> {
             c.getMiembros().stream().filter(m -> m.getNombre().equalsIgnoreCase(jugador)).forEach(mi -> {
                 Jugador j = (Jugador) mi;
                 j.setSanciones(j.getSanciones() + cantSanciones);
