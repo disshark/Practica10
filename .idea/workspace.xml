@@ -5,8 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d002959-45c4-47b1-a337-5c6cc220f53a" name="Changes" comment="save">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Entrenador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Entrenador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Club.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Deporte.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Director.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Entrenador.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Jugador.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Miembro.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practica10/module-info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Intercambio.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Club.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Club.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Deporte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Deporte.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Jugador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Jugador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,16 +37,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/jwz17/Documents/IntelliJ/1/Practica10"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jwz17/Documents/IntelliJ/1/Practica10&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -58,7 +71,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713208050378</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="save">
+      <option name="closed" value="true" />
+      <created>1713209772406</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1713209772406</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

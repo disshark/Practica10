@@ -7,10 +7,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
     private static List<Club> clubes = new ArrayList<>();
@@ -33,7 +32,7 @@ public class Main {
                 salir = true;
 
                 verDtsEquipo(nombrEquipo);
-
+                jugadorConvocado(nombrEquipo);
             } else {
                 System.out.println("No existe el equipo");
             }
@@ -59,7 +58,7 @@ public class Main {
         while ((line = br.readLine()) != null) {
             String[] datos = line.split(";");
             if(datos[1].equalsIgnoreCase("jugador")) {
-                miembros.add(new Jugador(datos[0], datos[1], datos[7], Integer.parseInt(datos[2]), datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), Double.parseDouble(datos[6])));
+                miembros.add(new Jugador(datos[0], datos[1], datos[7], Integer.parseInt(datos[2]), datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), Integer.parseInt(datos[6])));
             } else if(datos[1].equalsIgnoreCase("entrenador")) {
                 miembros.add(new Entrenador(datos[0], datos[1], datos[2]));
             } else if(datos[1].equalsIgnoreCase("director")) {
@@ -91,7 +90,33 @@ public class Main {
             System.out.println("\tJUGADORES");
             System.out.println("--------------------");
             e.getMiembros().stream().filter(j -> j.getCargo().equalsIgnoreCase("jugador")).forEach(jg -> System.out.println(jg.getNombre()));
-            System.out.println("Deporte: " + e.getDeporte());
+            System.out.println("Deporte: " + e.getDeporte().getNombre());
         });
+    }
+
+    public static void jugadorConvocado(String equipo) {
+
+        int numJugadores = 0;
+        for(Club c : clubes) {
+            if(c.getNombre().equalsIgnoreCase(equipo)) {
+                numJugadores = c.getDeporte().getNumJugador();
+            }
+        }
+        List<Miembro> miembrosOrdenados = ordenarMiembros(equipo);
+        System.out.println("Jugadores convocados:");
+        for(int i = 0; i < numJugadores; i++) {
+            System.out.println("\t-"+miembrosOrdenados.get(i).getNombre());
+        }
+    }
+
+    public static ArrayList<Miembro> ordenarMiembros(String equipo) {
+
+        List<Miembro> miembrosOrdenados = miembros.stream()
+                .filter(m -> m.getEquipo().equalsIgnoreCase(equipo))
+                .filter(m -> m.getCargo().equalsIgnoreCase("Jugador"))
+                .sorted(Comparator.comparingInt(m -> ((Jugador) m).getValor()).reversed()) // Ordenar de mayor a menor por valor
+                .collect(Collectors.toList());  // Recolectar en una lista
+
+        return new ArrayList<>(miembrosOrdenados);
     }
 }

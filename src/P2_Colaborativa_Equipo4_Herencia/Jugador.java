@@ -5,9 +5,9 @@ public class Jugador extends Miembro{
     private String posicion;
     private int tantos;
     private int sanciones;
-    private double valor;
+    private int valor;
 
-    public Jugador(String nombre, String cargo, String equipo, int dorsal, String posicion, int tantos, int sanciones, double valor) {
+    public Jugador(String nombre, String cargo, String equipo, int dorsal, String posicion, int tantos, int sanciones, int valor) {
         super(nombre, cargo, equipo);
         this.dorsal = dorsal;
         this.posicion = posicion;
@@ -48,11 +48,11 @@ public class Jugador extends Miembro{
         this.sanciones = sanciones;
     }
 
-    public double getValor() {
+    public int getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(int valor) {
         this.valor = valor;
     }
 
