@@ -1,6 +1,6 @@
-Sepak Takraw;Team Dragon Blaze;0
-Sepak Takraw;Tiger Strikers;0
-Voleibol;Phoenix Flyers;0
-Voleibol;Lightning Smashers;0
-Rugby Subacuatico;Thunder Twisters;0
-Rugby Subacuático;Rising Phoenix;0
+Sepak Takraw;Team Dragon Blaze;0;0
+Sepak Takraw;Tiger Strikers;0;0
+Voleibol;Phoenix Flyers;0;0
+Voleibol;Lightning Smashers;0;0
+Rugby Subacuatico;Thunder Twisters;0;0
+Rugby Subacuático;Rising Phoenix;0;0

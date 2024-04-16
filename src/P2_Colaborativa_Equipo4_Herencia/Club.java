@@ -22,13 +22,15 @@ public class Club {
     private Deporte deporte;
     private double valoracion;
     private int ranking;
+    private int partidoGanado;
 
-    public Club(String nombre, ArrayList<Miembro> miembros, Deporte deporte, double valoracion, int ranking) {
+    public Club(String nombre, ArrayList<Miembro> miembros, Deporte deporte, double valoracion, int ranking, int partidoGanado) {
         this.nombre = nombre;
         this.miembros = miembros;
         this.deporte = deporte;
         this.valoracion = valoracion;
         this.ranking = ranking;
+        this.partidoGanado = partidoGanado;
     }
 
     public String getNombre() {
@@ -63,13 +65,23 @@ public class Club {
         this.ranking = ranking;
     }
 
+    public int getPartidoGanado() {
+        return partidoGanado;
+    }
+
+    public void setPartidoGanado(int partidoGanado) {
+        this.partidoGanado = partidoGanado;
+    }
+
     public static ArrayList<Club> cargarClubes(String fichero, List<Miembro> miembros) throws IOException {
         ArrayList<Club> clubes = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(fichero));
         String line;
         while((line = br.readLine()) != null) {
             String[] datos = line.split(";");
-            clubes.add(new Club(datos[1], miembrosEquipo(miembros, datos[1]), buscarDeporte(datos[0]), valoracionEquipo(miembrosEquipo(miembros, datos[1])), Integer.parseInt(datos[2])));
+            clubes.add(new Club(datos[1], miembrosEquipo(miembros, datos[1]), buscarDeporte(datos[0]),
+                    valoracionEquipo(miembrosEquipo(miembros, datos[1])), Integer.parseInt(datos[2]),
+                    Integer.parseInt(datos[3])));
         }
         br.close();
         return clubes;
