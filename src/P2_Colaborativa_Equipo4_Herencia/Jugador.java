@@ -1,5 +1,7 @@
 package P2_Colaborativa_Equipo4_Herencia;
 
+import java.util.List;
+
 public class Jugador extends Miembro{
     private int dorsal;
     private String posicion;
@@ -58,5 +60,13 @@ public class Jugador extends Miembro{
 
     public static int calcularValor(int tantos, int sanciones) {
         return (tantos * 1000) - (sanciones * 500);
+    }
+    public static Jugador buscarJugador(String nombre, List<Miembro> miembros) {
+        for(Miembro m : miembros) {
+            if(m.getNombre().equalsIgnoreCase(nombre) && m instanceof Jugador) {
+                return (Jugador) m;
+            }
+        }
+        return null;
     }
 }

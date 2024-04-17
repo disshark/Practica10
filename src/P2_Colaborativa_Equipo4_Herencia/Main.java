@@ -1,12 +1,9 @@
 package P2_Colaborativa_Equipo4_Herencia;
 
 import java.awt.*;
-import java.io.BufferedReader;
+import java.io.*;
 
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,11 +11,13 @@ import java.util.stream.Collectors;
 public class Main {
     private static List<Club> clubes = new ArrayList<>();
     public static List<Miembro> miembros = new ArrayList<>();
+    public static ArrayList<Partido> partidos = new ArrayList<>();
     private static Scanner scanner = new  Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
         cargarMiembros("Miembros.txt");
         clubes = Club.cargarClubes("Club.txt", miembros);
+        System.out.println("Bienvenida a la NavesLiga");
         boolean salir = false;
         while (!salir) {
             clubes.forEach(c -> {
@@ -139,6 +138,12 @@ public class Main {
            t1.getJugador1().setEquipo(equipo2);
            t1.getJugador2().setEquipo(equipo1);
        }
+
+    }
+
+    public static void cargarJornada() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader("Jornada.txt"));
+        int jornada = Integer.parseInt(br.readLine());
 
     }
 }

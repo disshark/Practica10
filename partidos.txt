@@ -1,15 +1,13 @@
-/1
 =Team Dragon Blaze;Tiger Strikers
 #Tiger Strikers
 *Nozomi Okuhara;3
 *Anthony Sinisuka Ginting;1
 %Anthony Sinisuka Ginting;2
 %Chen Long;1
-~
+
 =Phoenix Flyers;Lightning Smashers
 #Lightning Smashers
 *Micah Christenson;2
 %Dmitriy Muserskiy;3
 %Tsvetan Sokolov;2
 %Wilfredo Leon;2
-~
