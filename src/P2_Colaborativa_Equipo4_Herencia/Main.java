@@ -11,6 +11,7 @@ public class Main {
     private static List<Club> clubes = new ArrayList<>();
     public static List<Miembro> miembros = new ArrayList<>();
     private static Scanner scanner = new  Scanner(System.in);
+    private static List<Transaccion> transacciones = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         cargarMiembros("Miembros.txt");
@@ -183,7 +184,7 @@ public class Main {
 
         jugador1.setEquipo(equipo2);
         jugador2.setEquipo(equipo1);
-
+        transacciones.add(new Transaccion(jugador1, jugador2));
     }
 
     public static void cargarJornada() throws IOException {
