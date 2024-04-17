@@ -119,4 +119,26 @@ public class Main {
 
         return new ArrayList<>(miembrosOrdenados);
     }
+
+    public static void intercambioJugadores() {
+
+        System.out.println("Selecciona el primer equipo: ");
+        String equipo1 = scanner.nextLine();
+        System.out.println("Selecciona el segundo equipo: ");
+        String equipo2 = scanner.nextLine();
+        System.out.println("JUGADORES EQUIPO 1:");
+        miembros.stream().filter(m -> m.getEquipo().equalsIgnoreCase(equipo1)).forEach(mi -> {
+            System.out.println(mi.getNombre());
+        });
+        System.out.println("JUGADORES EQUIPO 2:");
+        miembros.stream().filter(m -> m.getEquipo().equalsIgnoreCase(equipo2)).forEach(mi -> {
+            System.out.println(mi.getNombre());
+        });
+       for (Miembro m : miembros) {
+           Transaccion t1 = new Transaccion(new Miembro(m.getNombre(), m.getCargo(), m.getEquipo()), new Miembro(m.getNombre(), m.getCargo(), m.getEquipo()));
+           t1.getJugador1().setEquipo(equipo2);
+           t1.getJugador2().setEquipo(equipo1);
+       }
+
+    }
 }
