@@ -22,10 +22,12 @@ public class Main {
             for (Club club : clubes) {
                 if(club.getDeporte().getNombre().equalsIgnoreCase(deporte.getNombre())) {
                     System.out.println("*Club: "+club.getNombre());
-                    String director = club.getMiembros().stream().filter(c -> c.getCargo().equalsIgnoreCase("Director")).toString();
-                    System.out.println("\t-Director: "+director);
-                    String entrenador = club.getMiembros().stream().filter(c -> c.getCargo().equalsIgnoreCase("Entrenador")).toString();
-                    System.out.println("\t-Entrenador: "+entrenador);
+                    club.getMiembros().stream().filter(c -> c.getCargo().equalsIgnoreCase("Director")).forEach(c -> {
+                        System.out.println("\t-Director: "+c.getNombre());
+                    });
+                    club.getMiembros().stream().filter(c -> c.getCargo().equalsIgnoreCase("Entrenador")).forEach(c -> {
+                        System.out.println("\t-Entrenador: "+c.getNombre());
+                    });
                     System.out.println("\t-Jugadores:");
                     club.getMiembros().stream().filter(c -> c.getCargo().equalsIgnoreCase("Jugador")).forEach(c -> System.out.println("\t\t+"+c.getNombre()));
                 }
