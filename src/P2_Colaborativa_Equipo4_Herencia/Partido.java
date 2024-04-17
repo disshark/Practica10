@@ -26,6 +26,14 @@ public class Partido {
         this.goleadores = goleadores;
     }
 
+    public String getEquipo2() {
+        return equipo2;
+    }
+
+    public String getEquipo1() {
+        return equipo1;
+    }
+
     public String getGanador() {
         return ganador;
     }

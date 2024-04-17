@@ -13,6 +13,7 @@ public class Main {
     private static Scanner scanner = new  Scanner(System.in);
     private static List<Transaccion> transacciones = new ArrayList<>();
 
+
     public static void main(String[] args) throws IOException {
         cargarMiembros("Miembros.txt");
         clubes = Club.cargarClubes("Club.txt", miembros);
@@ -56,15 +57,43 @@ public class Main {
             }
 
         }
-        Partido.cargarPartidos("partidos.txt", miembros, clubes).forEach(partido -> System.out.println());
+        Partido.cargarPartidos("partidos.txt", miembros, clubes).forEach(partido -> System.out.println(
+                partido.getEquipo1() + " VS " + partido.getEquipo2() + "\n" +
+                partido.getGanador()
+        ));
 
-        intercambioJugadores();
         actualizarJornada();
         actualizarMiembro();
+        actualizarRanking();
     }
 
+    public static void actualizarRanking() throws IOException {
+        List<Club> clubsOrdenados = ordenarClubs();
+        int rankingVoley = 1;
+        int rankingSepak = 1;
+        int rankingRugby = 1;
+        BufferedWriter bw = new BufferedWriter(new FileWriter("NavesLiga.txt"));
+        try (bw) {
+           for (Club c : clubsOrdenados) {
+               if(c.getDeporte().getNombre().equalsIgnoreCase("voleibol")) {
+                   c.setRanking(rankingVoley);
+                   rankingVoley++;
+               } else if (c.getDeporte().getNombre().equalsIgnoreCase("Sepak Takraw")) {
+                   c.setRanking(rankingSepak);
+                   rankingSepak++;
+               } else {
+                   c.setRanking(rankingRugby);
+                   rankingRugby++;
+               }
+               bw.write("#" + c.getDeporte().getNombre());
+               bw.write(c.getNombre() + ";" + c.getRanking());
+           }
+        }
+    }
+
+
     public  static void cargarDts() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("NavesLigas.txt"));
+        BufferedReader br = new BufferedReader(new FileReader("NavesLiga.txt"));
         String line;
         while ((line = br.readLine()) != null) {
             String[] values = line.split(";");
@@ -138,6 +167,16 @@ public class Main {
         }
     }
 
+
+    public static ArrayList<Club> ordenarClubs() {
+        List<Club> clubsOrdenados = clubes.stream()
+                .sorted(Comparator.comparingInt(Club::getPartidoGanado).reversed()) // Ordenar de mayor a menor por partidos ganados
+                .collect(Collectors.toList());  // Recolectar en una lista
+
+        return new ArrayList<>(clubsOrdenados);
+    }
+
+
     public static ArrayList<Miembro> ordenarMiembros(String equipo) {
 
         List<Miembro> miembrosOrdenados = miembros.stream()
@@ -181,7 +220,6 @@ public class Main {
                 System.out.println("No existe este jugador");
             }
         }
-
         jugador1.setEquipo(equipo2);
         jugador2.setEquipo(equipo1);
         transacciones.add(new Transaccion(jugador1, jugador2));

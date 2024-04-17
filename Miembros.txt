@@ -33,20 +33,20 @@ Romelu Lukaku;jugador;45;Atacante;0;0;0;Rising Phoenix
 Harry Kane;jugador;98;Atacante;0;0;0;Rising Phoenix
 Jadon Sancho;jugador;67;Atacante;0;0;0;Rising Phoenix
 Kento Momota;jugador;10;Tekong;0;0;0;Team Dragon Blaze
-Chen Long;jugador;7;Striker;0;0;0;Team Dragon Blaze
+Chen Long;jugador;7;Striker;3;0;0;Team Dragon Blaze
 Tai Tzu-ying;jugador;11;Feeder;0;0;0;Team Dragon Blaze
-Nozomi Okuhara;jugador;9;Tekong;0;0;0;Tiger Strikers
-Anthony Sinisuka Ginting;jugador;17;Striker;0;0;0;Tiger Strikers
+Nozomi Okuhara;jugador;9;Tekong;0;9;0;Tiger Strikers
+Anthony Sinisuka Ginting;jugador;17;Striker;6;3;0;Tiger Strikers
 Pusarla Venkata Sindhu;jugador;10;Feeder;0;0;0;Tiger Strikers
 Bruno Rezende;jugador;10;Armador;0;0;0;Phoenix Flyers
 Maxwell Holt;jugador;7;Central;0;0;0;Phoenix Flyers
 Earvin Ngapeth;jugador;11;Opuesto;0;0;0;Phoenix Flyers
 Facundo Conte;jugador;9;Punta;0;0;0;Phoenix Flyers
 Lucas Saatkamp;jugador;17;Central;0;0;0;Phoenix Flyers
-Wilfredo Leon;jugador;10;Opuesto;0;0;0;Phoenix Flyers
-Micah Christenson;jugador;6;Armador;0;0;0;Lightning Smashers
-Dmitriy Muserskiy;jugador;18;Central;0;0;0;Lightning Smashers
-Tsvetan Sokolov;jugador;27;Opuesto;0;0;0;Lightning Smashers
+Wilfredo Leon;jugador;10;Opuesto;6;0;0;Phoenix Flyers
+Micah Christenson;jugador;6;Armador;0;6;0;Lightning Smashers
+Dmitriy Muserskiy;jugador;18;Central;9;0;0;Lightning Smashers
+Tsvetan Sokolov;jugador;27;Opuesto;6;0;0;Lightning Smashers
 Matt Anderson;jugador;3;Punta;0;0;0;Lightning Smashers
 Nimir Abdel-Aziz;jugador;9;Opuesto;0;0;0;Lightning Smashers
 Yoandy Leal;jugador;9;Punta;0;0;0;Lightning Smashers
