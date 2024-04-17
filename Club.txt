@@ -3,4 +3,4 @@ Sepak Takraw;Tiger Strikers;0;0
 Voleibol;Phoenix Flyers;0;0
 Voleibol;Lightning Smashers;0;0
 Rugby Subacuatico;Thunder Twisters;0;0
-Rugby Subacuático;Rising Phoenix;0;0
+Rugby Subacuatico;Rising Phoenix;0;0

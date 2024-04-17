@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Partido {
+    private String equipo1;
+    private String equipo2;
 
     private String ganador;
 
@@ -16,7 +18,9 @@ public class Partido {
 
     private HashMap<String, Integer> goleadores;
 
-    public Partido(String ganador, HashMap<String, Integer> sancionados, HashMap<String, Integer> goleadores) {
+    public Partido(String equipo1, String equipo2, String ganador, HashMap<String, Integer> sancionados, HashMap<String, Integer> goleadores) {
+        this.equipo1 = equipo1;
+        this.equipo2 = equipo2;
         this.ganador = ganador;
         this.sancionados = sancionados;
         this.goleadores = goleadores;
@@ -34,7 +38,7 @@ public class Partido {
         return goleadores;
     }
 
-    public static ArrayList<Partido> cargarPartidos(String fichero, List<Miembro> miembros) throws IOException {
+    public static ArrayList<Partido> cargarPartidos(String fichero, List<Miembro> miembros, List<Club> clubes) throws IOException {
         ArrayList<Partido> partidos = new ArrayList<>();
         StringBuilder todosResult = new StringBuilder();
 
@@ -47,16 +51,30 @@ public class Partido {
         String[] parrafo = todosResult.toString().split("\n\n");
 
         for(String s : parrafo) {
+            String equipo1 = null;
+            String equipo2 = null;
             String equipoGanado = null;
             HashMap<String, Integer> sancionados = new HashMap<>();
             HashMap<String, Integer> goleadores = new HashMap<>();
             for(String l : s.split("\n")) {
+                if (l.startsWith("=")) {
+                    String[] equipos = l.substring(1).split(";");
+                    if (equipos.length == 2) {
+                        if (Club.comprobarClub(equipos[0], clubes) && Club.comprobarClub(equipos[1], clubes)) {
+                            equipo1 = equipos[0];
+                            equipo2 = equipos[1];
+                        } else {
+                            throw new Error("Hay algun club que no existe en esta liga");
+                        }
+                    } else {
+                        throw new Error("La cantidad de equipos en una partida no es correcto");
+                    }
+
+                }
                 if(l.startsWith("#")) {
                     equipoGanado = l.substring(1);
-                    for(Deporte d : Club.deportes) {
-                        if(!d.getNombre().equalsIgnoreCase(equipoGanado)){
-                            throw new Error("No existe el equipo");
-                        }
+                    if (!Club.comprobarClub(equipoGanado, clubes)) {
+                        throw new Error("No existe el equipo");
                     }
                 } else if (l.startsWith("*")) {
                     String[] datos = l.substring(1).split(";");
@@ -78,7 +96,7 @@ public class Partido {
                     }
                 }
             }
-            partidos.add(new Partido(equipoGanado, sancionados, goleadores));
+            partidos.add(new Partido(equipo1, equipo2, equipoGanado, sancionados, goleadores));
         }
         return partidos;
 

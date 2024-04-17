@@ -1,6 +1,5 @@
 package P2_Colaborativa_Equipo4_Herencia;
 
-import java.awt.*;
 import java.io.*;
 
 
@@ -11,20 +10,34 @@ import java.util.stream.Collectors;
 public class Main {
     private static List<Club> clubes = new ArrayList<>();
     public static List<Miembro> miembros = new ArrayList<>();
-    public static ArrayList<Partido> partidos = new ArrayList<>();
     private static Scanner scanner = new  Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
         cargarMiembros("Miembros.txt");
         clubes = Club.cargarClubes("Club.txt", miembros);
         System.out.println("Bienvenida a la NavesLiga");
+        cargarJornada();
+        Club.deportes.forEach(deporte -> {
+            System.out.println("------------------"+deporte.getNombre()+"------------------");
+            for (Club club : clubes) {
+                if(club.getDeporte().getNombre().equalsIgnoreCase(deporte.getNombre())) {
+                    System.out.println("*Club: "+club.getNombre());
+                    String director = club.getMiembros().stream().filter(c -> c.getCargo().equalsIgnoreCase("Director")).toString();
+                    System.out.println("\t-Director: "+director);
+                    String entrenador = club.getMiembros().stream().filter(c -> c.getCargo().equalsIgnoreCase("Entrenador")).toString();
+                    System.out.println("\t-Entrenador: "+entrenador);
+                    System.out.println("\t-Jugadores:");
+                    club.getMiembros().stream().filter(c -> c.getCargo().equalsIgnoreCase("Jugador")).forEach(c -> {
+                        System.out.println("\t\t+"+c.getNombre());
+                    });
+                }
+            }
+        });
         boolean salir = false;
         while (!salir) {
-            clubes.forEach(c -> {
-                System.out.println(c.getNombre());
-            });
             System.out.println("--------------------------");
             System.out.println("Elige el equipo que desees: ");
+            clubes.forEach(c -> System.out.println(c.getNombre()));
             String nombrEquipo = scanner.nextLine();
 
             if (clubes.stream().anyMatch(c -> c.getNombre().equalsIgnoreCase(nombrEquipo))) {
@@ -37,13 +50,18 @@ public class Main {
             }
 
         }
-        sancionar();
+        Partido.cargarPartidos("partidos.txt", miembros, clubes).forEach(partido -> {
+            System.out.println();
+        });
 
+        intercambioJugadores();
+        actualizarJornada();
+        actualizarMiembro();
     }
 
     public  static void cargarDts() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(new File("NavesLigas.txt")));
-        String line = "";
+        BufferedReader br = new BufferedReader(new FileReader("NavesLigas.txt"));
+        String line;
         while ((line = br.readLine()) != null) {
             String[] values = line.split(";");
 
@@ -67,17 +85,25 @@ public class Main {
         br.close();
     }
 
-    public static void sancionar() {
-        System.out.println("¿Que jugador va a recivir las sanciones?");
-        String jugador = scanner.nextLine();
-        System.out.println("Sanciones a aplicar: ");
-        int cantSanciones = scanner.nextInt();
-        clubes.forEach(c -> {
-            c.getMiembros().stream().filter(m -> m.getNombre().equalsIgnoreCase(jugador)).forEach(mi -> {
-                Jugador j = (Jugador) mi;
-                j.setSanciones(j.getSanciones() + cantSanciones);
-            });
-        });
+    public static void actualizarMiembro() throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter("Miembros.txt"));
+        for (Miembro m : miembros) {
+            if(m instanceof Jugador) {
+                bw.write(m.getNombre()+";"
+                        +m.getCargo()+";"
+                        +((Jugador) m).getDorsal()+";"
+                        +((Jugador) m).getPosicion()+";"
+                        +((Jugador) m).getTantos()+";"
+                        +((Jugador) m).getSanciones()+";"
+                        +((Jugador) m).getValor()+";"
+                        +m.getEquipo()+"\n");
+            } else if (m instanceof Entrenador) {
+                bw.write(m.getNombre()+";"+m.getCargo()+";"+m.getEquipo()+"\n");
+            } else if (m instanceof Director) {
+                bw.write(m.getNombre()+";"+m.getCargo()+";"+m.getEquipo()+"\n");
+            }
+        }
+        bw.close();
     }
 
     public  static void verDtsEquipo(String nombrEquipo){
@@ -125,25 +151,74 @@ public class Main {
         String equipo1 = scanner.nextLine();
         System.out.println("Selecciona el segundo equipo: ");
         String equipo2 = scanner.nextLine();
-        System.out.println("JUGADORES EQUIPO 1:");
-        miembros.stream().filter(m -> m.getEquipo().equalsIgnoreCase(equipo1)).forEach(mi -> {
-            System.out.println(mi.getNombre());
-        });
-        System.out.println("JUGADORES EQUIPO 2:");
-        miembros.stream().filter(m -> m.getEquipo().equalsIgnoreCase(equipo2)).forEach(mi -> {
-            System.out.println(mi.getNombre());
-        });
-       for (Miembro m : miembros) {
-           Transaccion t1 = new Transaccion(new Miembro(m.getNombre(), m.getCargo(), m.getEquipo()), new Miembro(m.getNombre(), m.getCargo(), m.getEquipo()));
-           t1.getJugador1().setEquipo(equipo2);
-           t1.getJugador2().setEquipo(equipo1);
-       }
+        Jugador jugador1 = null;
+        Jugador jugador2 = null;
+        boolean comprobarJugador1 = false;
+        while (!comprobarJugador1) {
+            System.out.println("JUGADORES EQUIPO 1:");
+            miembros.stream().filter(m -> m.getEquipo().equalsIgnoreCase(equipo1)).forEach(mi -> System.out.println(mi.getNombre()));
+            System.out.println("Que jugado vas a cambiar del equipo "+equipo1);
+            jugador1 = Jugador.buscarJugador(scanner.nextLine(), miembros) != null ? Jugador.buscarJugador(scanner.nextLine(), miembros) : null;
+            if(jugador1 != null) {
+                comprobarJugador1 = true;
+            } else {
+                System.out.println("No existe este jugador");
+            }
+        }
+        boolean comprobarJugador2 = false;
+        while (!comprobarJugador2) {
+            System.out.println("JUGADORES EQUIPO 2:");
+            miembros.stream().filter(m -> m.getEquipo().equalsIgnoreCase(equipo2)).forEach(mi -> System.out.println(mi.getNombre()));
+            System.out.println("Que jugado vas a cambiar del equipo "+equipo2);
+            jugador2 = Jugador.buscarJugador(scanner.nextLine(), miembros) != null ? Jugador.buscarJugador(scanner.nextLine(), miembros) : null;
+            if(jugador2 != null) {
+                comprobarJugador2 = true;
+            } else {
+                System.out.println("No existe este jugador");
+            }
+        }
+
+        jugador1.setEquipo(equipo2);
+        jugador2.setEquipo(equipo1);
 
     }
 
-    public static void cargarJornada() throws IOException {
+    public static int cargarJornada() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("Jornada.txt"));
-        int jornada = Integer.parseInt(br.readLine());
+        int jornada = 0;
+        try {
+            // Lee la línea
+            String linea = br.readLine();
 
+            // Intenta convertir la línea a un entero
+            jornada = Integer.parseInt(linea);
+
+            // Si llega hasta aquí, la conversión fue exitosa
+            System.out.println("La jornada es: " + jornada);
+        } catch (NumberFormatException e) {
+            System.err.println("El formato del archivo jornada esta incorrecto");
+        }
+        br.close();
+        return jornada;
     }
+
+    public static void actualizarJornada() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader("Jornada.txt"));
+        try {
+            // Lee la línea
+            String linea = br.readLine();
+
+            // Intenta convertir la línea a un entero
+            int jornada = Integer.parseInt(linea) + 1;
+            BufferedWriter bw = new BufferedWriter(new FileWriter("Jornada.txt"));
+            bw.write(jornada);
+            bw.close();
+
+        } catch (NumberFormatException e) {
+            System.err.println("El formato del archivo jornada esta incorrecto");
+        }
+        br.close();
+    }
+
+
 }

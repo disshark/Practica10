@@ -24,4 +24,5 @@ public class Transaccion {
     public void setJugador2(Miembro jugador2) {
         this.jugador2 = jugador2;
     }
+
 }

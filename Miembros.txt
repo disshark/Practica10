@@ -20,12 +20,12 @@ Virgil van Dijk;jugador;4;Defensa;0;0;0;Thunder Twisters
 Sergio Ramos;jugador;20;Defensa;0;0;0;Thunder Twisters
 Alisson Becker;jugador;1;Guardameta;0;0;0;Thunder Twisters
 Jan Oblak;jugador;13;Guardameta;0;0;0;Thunder Twisters
-Kylian Mbappé;jugador;99;Atacante;0;0;0;Thunder Twisters
-Sadio Mané;jugador;25;Atacante;0;0;0;Rising Phoenix
+Kylian Mbappe;jugador;99;Atacante;0;0;0;Thunder Twisters
+Sadio Mane;jugador;25;Atacante;0;0;0;Rising Phoenix
 Mohamed Salah;jugador;28;Atacante;0;0;0;Rising Phoenix
 Joshua Kimmich;jugador;39;Medio;0;0;0;Rising Phoenix
 Bruno Fernandes;jugador;18;Medio;0;0;0;Rising Phoenix
-João Cancelo;jugador;27;Defensa;0;0;0;Rising Phoenix
+Joao Cancelo;jugador;27;Defensa;0;0;0;Rising Phoenix
 Trent Alexander-Arnold;jugador;66;Defensa;0;0;0;Rising Phoenix
 Ruben Dias;jugador;54;Defensa;0;0;0;Rising Phoenix
 Erling Haaland;jugador;21;Atacante;0;0;0;Rising Phoenix
@@ -43,7 +43,7 @@ Maxwell Holt;jugador;7;Central;0;0;0;Phoenix Flyers
 Earvin Ngapeth;jugador;11;Opuesto;0;0;0;Phoenix Flyers
 Facundo Conte;jugador;9;Punta;0;0;0;Phoenix Flyers
 Lucas Saatkamp;jugador;17;Central;0;0;0;Phoenix Flyers
-Wilfredo León;jugador;10;Opuesto;0;0;0;Phoenix Flyers
+Wilfredo Leon;jugador;10;Opuesto;0;0;0;Phoenix Flyers
 Micah Christenson;jugador;6;Armador;0;0;0;Lightning Smashers
 Dmitriy Muserskiy;jugador;18;Central;0;0;0;Lightning Smashers
 Tsvetan Sokolov;jugador;27;Opuesto;0;0;0;Lightning Smashers
