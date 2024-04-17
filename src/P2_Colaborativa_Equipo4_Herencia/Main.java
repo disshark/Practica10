@@ -27,11 +27,14 @@ public class Main {
                     String entrenador = club.getMiembros().stream().filter(c -> c.getCargo().equalsIgnoreCase("Entrenador")).toString();
                     System.out.println("\t-Entrenador: "+entrenador);
                     System.out.println("\t-Jugadores:");
-                    club.getMiembros().stream().filter(c -> c.getCargo().equalsIgnoreCase("Jugador")).forEach(c -> {
-                        System.out.println("\t\t+"+c.getNombre());
-                    });
+                    club.getMiembros().stream().filter(c -> c.getCargo().equalsIgnoreCase("Jugador")).forEach(c -> System.out.println("\t\t+"+c.getNombre()));
                 }
             }
+        });
+        System.out.println("------------------"+"Jugadores titulares para jornada proxima"+"------------------");
+        clubes.forEach(club -> {
+            System.out.println("*Club: "+club.getNombre());
+            jugadorConvocado(club.getNombre());
         });
         boolean salir = false;
         while (!salir) {
@@ -50,9 +53,7 @@ public class Main {
             }
 
         }
-        Partido.cargarPartidos("partidos.txt", miembros, clubes).forEach(partido -> {
-            System.out.println();
-        });
+        Partido.cargarPartidos("partidos.txt", miembros, clubes).forEach(partido -> System.out.println());
 
         intercambioJugadores();
         actualizarJornada();
@@ -128,7 +129,7 @@ public class Main {
             }
         }
         List<Miembro> miembrosOrdenados = ordenarMiembros(equipo);
-        System.out.println("Jugadores convocados:");
+        System.out.println("-Jugadores convocados:");
         for(int i = 0; i < numJugadores; i++) {
             System.out.println("\t-"+miembrosOrdenados.get(i).getNombre());
         }
@@ -183,15 +184,14 @@ public class Main {
 
     }
 
-    public static int cargarJornada() throws IOException {
+    public static void cargarJornada() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("Jornada.txt"));
-        int jornada = 0;
         try {
             // Lee la línea
             String linea = br.readLine();
 
             // Intenta convertir la línea a un entero
-            jornada = Integer.parseInt(linea);
+            int jornada = Integer.parseInt(linea);
 
             // Si llega hasta aquí, la conversión fue exitosa
             System.out.println("La jornada es: " + jornada);
@@ -199,7 +199,6 @@ public class Main {
             System.err.println("El formato del archivo jornada esta incorrecto");
         }
         br.close();
-        return jornada;
     }
 
     public static void actualizarJornada() throws IOException {
