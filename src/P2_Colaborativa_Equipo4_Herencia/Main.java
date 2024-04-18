@@ -238,16 +238,51 @@ public class Main {
 
     public static void intercambioJugadores() {
 
-        System.out.println("Selecciona el primer equipo: ");
-        String equipo1 = scanner.nextLine();
-        System.out.println("Selecciona el segundo equipo: ");
-        String equipo2 = scanner.nextLine();
+        boolean comprobar1 = false;
+        boolean comprobar2 = false;
+        boolean comprobarTodo = false;
+        String equipo1 = "";
+        String equipo2 = "";
+        while(!comprobarTodo) {
+            while(!comprobar1) {
+                System.out.println("Selecciona el primer equipo: ");
+                clubes.forEach(c -> System.out.println(c.getNombre()));
+                equipo1 = scanner.nextLine();
+                if(Club.comprobarClub(equipo1, clubes)) {
+                    comprobar1 = true;
+                } else {
+                    System.out.println("Equipo introducido no existe");
+                }
+            }
+            while(!comprobar2) {
+                System.out.println("Selecciona el segundo equipo: ");
+                clubes.forEach(c -> System.out.println(c.getNombre()));
+                equipo2 = scanner.nextLine();
+                if(Club.comprobarClub(equipo2, clubes)) {
+                    comprobar2 = true;
+                } else {
+                    System.out.println("Equipo introducido no existe");
+                }
+            }
+            if (Club.buscarClub(equipo1, clubes).getDeporte().getNombre().equalsIgnoreCase(Club.buscarClub(equipo2, clubes).getDeporte().getNombre())) {
+                if (equipo1.equalsIgnoreCase(equipo2)) {
+                    comprobarTodo = true;
+                } else {
+                    System.out.println("Has elegido el mismo equipo");
+                }
+            } else {
+                System.out.println("Los dos clubs no tienen el mismo deporte");
+            }
+        }
+
+
         Jugador jugador1 = null;
         Jugador jugador2 = null;
         boolean comprobarJugador1 = false;
         while (!comprobarJugador1) {
             System.out.println("JUGADORES EQUIPO 1:");
-            miembros.stream().filter(m -> m.getEquipo().equalsIgnoreCase(equipo1)).filter(m -> m.getCargo().equalsIgnoreCase("Jugador")).forEach(mi -> System.out.println(mi.getNombre()));
+            String equipoSeleccionado = equipo1;
+            miembros.stream().filter(m -> m.getEquipo().equalsIgnoreCase(equipoSeleccionado)).filter(m -> m.getCargo().equalsIgnoreCase("Jugador")).forEach(mi -> System.out.println(mi.getNombre()));
             System.out.println("Que jugado vas a cambiar del equipo "+equipo1);
             jugador1 = Jugador.buscarJugador(scanner.nextLine(), miembros);
             if(jugador1 != null) {
@@ -259,7 +294,8 @@ public class Main {
         boolean comprobarJugador2 = false;
         while (!comprobarJugador2) {
             System.out.println("JUGADORES EQUIPO 2:");
-            miembros.stream().filter(m -> m.getEquipo().equalsIgnoreCase(equipo2)).filter(m -> m.getCargo().equalsIgnoreCase("Jugador")).forEach(mi -> System.out.println(mi.getNombre()));
+            String equipoSeleccionado = equipo2;
+            miembros.stream().filter(m -> m.getEquipo().equalsIgnoreCase(equipoSeleccionado)).filter(m -> m.getCargo().equalsIgnoreCase("Jugador")).forEach(mi -> System.out.println(mi.getNombre()));
             System.out.println("Que jugado vas a cambiar del equipo "+equipo2);
             jugador2 = Jugador.buscarJugador(scanner.nextLine(), miembros);
             if(jugador2 != null) {
