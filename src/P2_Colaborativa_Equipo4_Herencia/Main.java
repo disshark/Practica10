@@ -15,11 +15,11 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
-        cargarMiembros("Miembros.txt");
+        cargarMiembros("Miembros.txt");//Cargar los miembros
         clubes = Club.cargarClubes("Club.txt", miembros);
         System.out.println("Bienvenida a la NavesLiga");
-        cargarJornada();
-        Club.deportes.forEach(deporte -> {
+        cargarJornada();//Cargar jornada
+        Club.deportes.forEach(deporte -> {//Imprimir los clubs de diferentes deportes
             System.out.println("------------------"+deporte.getNombre()+"------------------");
             for (Club club : clubes) {
                 if(club.getDeporte().getNombre().equalsIgnoreCase(deporte.getNombre())) {
@@ -35,6 +35,7 @@ public class Main {
                 }
             }
         });
+        //Imprimir los jugadores titulares
         System.out.println("------------------"+"Jugadores titulares para jornada proxima"+"------------------");
         clubes.forEach(club -> {
             System.out.println("*Club: "+club.getNombre());
@@ -53,7 +54,6 @@ public class Main {
                 intercambioJugadores();
             } else if (opcion.equalsIgnoreCase("no")) {
                 intercambio = true;
-                continue;
             } else {
                 System.out.println("Opcion incorrecta, intentalo de nuevo");
             }
@@ -99,10 +99,14 @@ public class Main {
         Club.actualizarClub(clubes);
     }
 
+    /**
+     * Metodo para actualizar el ranking
+     * @throws IOException
+     */
     public static void actualizarRanking() throws IOException {
-        List<Club> clubsOrdenados = ordenarClubs();
+        List<Club> clubsOrdenados = ordenarClubs();//ordenar el array
         BufferedWriter bw = new BufferedWriter(new FileWriter("NavesLiga.txt"));
-        for (Deporte d : Club.deportes) {
+        for (Deporte d : Club.deportes) {//Un ranking para diferentes deportes
             int ranking = 1;
             bw.write("------------------"+d.getNombre()+"------------------\n");
             for (Club c : clubsOrdenados) {
@@ -116,7 +120,10 @@ public class Main {
         bw.close();
     }
 
-
+    /**
+     * Metodo para cargar los datos de la liga
+     * @throws IOException
+     */
     public  static void cargarDts() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("NavesLiga.txt"));
         String line;
@@ -127,6 +134,11 @@ public class Main {
         br.close();
     }
 
+    /**
+     * Metodo para cargar los miembros
+     * @param fichero
+     * @throws IOException
+     */
     public static void cargarMiembros(String fichero) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(fichero));
         String line;
@@ -143,6 +155,10 @@ public class Main {
         br.close();
     }
 
+    /**
+     * Metodo para actualizar los miembros
+     * @throws IOException
+     */
     public static void actualizarMiembro() throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter("Miembros.txt"));
         for (Miembro m : miembros) {
@@ -164,6 +180,11 @@ public class Main {
         bw.close();
     }
 
+    /**
+     * Metodo para mostrar los datos de un club
+     * @param nombrEquipo
+     * @throws IOException
+     */
     public static void verDtsEquipo(String nombrEquipo) throws IOException {
         clubes.stream().filter(c -> c.getNombre().equalsIgnoreCase(nombrEquipo)).forEach(e -> {
             System.out.println("*Valoracion: " + e.getValoracion());
@@ -175,7 +196,7 @@ public class Main {
         });
         System.out.println("*Ultimo cambio de miembro:");
         Transaccion cambio = Transaccion.buscarTransaccion(nombrEquipo, miembros, clubes);
-        if(cambio != null) {
+        if(cambio != null) {//Comprobar si el equipo ha hecho cambios anteriormente
             System.out.println("~"+cambio.getJugador1().getNombre()+" del equipo "+cambio.getJugador1().getEquipo()
                     +" -> "+cambio.getJugador2().getNombre()+" del equipo "+cambio.getJugador2().getEquipo());
         } else {
@@ -185,8 +206,8 @@ public class Main {
         Club.buscarClub(nombrEquipo, clubes)
                 .getMiembros()
                 .stream()
-                .filter(m -> m instanceof Jugador)
-                .map(m -> (Jugador) m).sorted(Comparator.comparingInt(Jugador::getSanciones).reversed())
+                .filter(m -> m instanceof Jugador)//Filtrar por jugador
+                .map(m -> (Jugador) m).sorted(Comparator.comparingInt(Jugador::getSanciones).reversed())//Ordenar de mayor a menor dependiendo de sanciones
                 .forEach(j -> {
                     System.out.println("\t+"+j.getNombre()+" con "+j.getSanciones()+" sanciones");
                 });
@@ -200,6 +221,10 @@ public class Main {
 
     }
 
+    /**
+     * Metodo para sacar jugador convocado (titular)
+     * @param equipo
+     */
     public static void jugadorConvocado(String equipo) {
 
         int numJugadores = 0;
@@ -215,7 +240,10 @@ public class Main {
         }
     }
 
-
+    /**
+     * Metodo para ordenar los club de mayor a menor dependiendo de los partidos ganados
+     * @return
+     */
     public static ArrayList<Club> ordenarClubs() {
         List<Club> clubsOrdenados = clubes.stream()
                 .sorted(Comparator.comparingInt(Club::getPartidoGanado).reversed()) // Ordenar de mayor a menor por partidos ganados
@@ -224,7 +252,11 @@ public class Main {
         return new ArrayList<>(clubsOrdenados);
     }
 
-
+    /**
+     * Metodo para ordenar miembros del equipo de mayor a menor dependiendo del valor
+     * @param equipo
+     * @return
+     */
     public static ArrayList<Miembro> ordenarMiembros(String equipo) {
 
         List<Miembro> miembrosOrdenados = miembros.stream()
@@ -236,14 +268,16 @@ public class Main {
         return new ArrayList<>(miembrosOrdenados);
     }
 
+    /**
+     * Metodo para hacer intercambio de los jugadores
+     */
     public static void intercambioJugadores() {
-
-        boolean comprobar1 = false;
-        boolean comprobar2 = false;
         boolean comprobarTodo = false;
         String equipo1 = "";
         String equipo2 = "";
         while(!comprobarTodo) {
+            boolean comprobar1 = false;
+            boolean comprobar2 = false;
             while(!comprobar1) {
                 System.out.println("Selecciona el primer equipo: ");
                 clubes.forEach(c -> System.out.println(c.getNombre()));
@@ -265,7 +299,7 @@ public class Main {
                 }
             }
             if (Club.buscarClub(equipo1, clubes).getDeporte().getNombre().equalsIgnoreCase(Club.buscarClub(equipo2, clubes).getDeporte().getNombre())) {
-                if (equipo1.equalsIgnoreCase(equipo2)) {
+                if (!equipo1.equalsIgnoreCase(equipo2)) {
                     comprobarTodo = true;
                 } else {
                     System.out.println("Has elegido el mismo equipo");
@@ -274,8 +308,6 @@ public class Main {
                 System.out.println("Los dos clubs no tienen el mismo deporte");
             }
         }
-
-
         Jugador jugador1 = null;
         Jugador jugador2 = null;
         boolean comprobarJugador1 = false;
@@ -309,6 +341,10 @@ public class Main {
         transacciones.add(new Transaccion(jugador1, jugador2));
     }
 
+    /**
+     * Metodo para cargar la jornada actual
+     * @throws IOException
+     */
     public static void cargarJornada() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("Jornada.txt"));
         try {
@@ -326,6 +362,10 @@ public class Main {
         br.close();
     }
 
+    /**
+     * Metodo para actualizar la jornada
+     * @throws IOException
+     */
     public static void actualizarJornada() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("Jornada.txt"));
         try {

@@ -14,7 +14,7 @@ public class Club {
             new Deporte("Rugby Subacuatico", 11)
     ));
     private String nombre;
-    private ArrayList<Miembro> miembros = new ArrayList<>();
+    private ArrayList<Miembro> miembros;
     private Deporte deporte;
     private double valoracion;
     private int ranking;

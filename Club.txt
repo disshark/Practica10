@@ -1,6 +1,6 @@
 Sepak Takraw;Team Dragon Blaze;2;0
-Sepak Takraw;Tiger Strikers;1;1
+Sepak Takraw;Tiger Strikers;1;4
 Voleibol;Phoenix Flyers;2;0
-Voleibol;Lightning Smashers;1;1
+Voleibol;Lightning Smashers;1;4
 Rugby Subacuatico;Thunder Twisters;1;0
 Rugby Subacuatico;Rising Phoenix;2;0
