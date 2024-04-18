@@ -9,13 +9,13 @@ public class Jugador extends Miembro{
     private int sanciones;
     private int valor;
 
-    public Jugador(String nombre, String cargo, String equipo, int dorsal, String posicion, int tantos, int sanciones, int valor) {
+    public Jugador(String nombre, String cargo, String equipo, int dorsal, String posicion, int tantos, int sanciones) {
         super(nombre, cargo, equipo);
         this.dorsal = dorsal;
         this.posicion = posicion;
         this.tantos = tantos;
         this.sanciones = sanciones;
-        this.valor = valor;
+        this.valor = calcularValor(tantos, sanciones);
     }
 
     public int getDorsal() {

@@ -40,27 +40,58 @@ public class Main {
             System.out.println("*Club: "+club.getNombre());
             jugadorConvocado(club.getNombre());
         });
+        System.out.println("------------------"+"Partidos de esta jornada"+"------------------");
+        Partido.cargarPartidos("partidos.txt", miembros, clubes).forEach(partido -> System.out.println(
+                "*Equipos: "+partido.getEquipo1() + " VS " + partido.getEquipo2() + "\n" + "*Ganador" +partido.getGanador()
+        ));
+        System.out.println("------------------------------------------------------------------");
+        boolean intercambio = false;
+        while (!intercambio) {
+            System.out.println("Algun equipo hace intercambio de jugador? si/no");
+            String opcion = scanner.nextLine();
+            if (opcion.equalsIgnoreCase("si")) {
+                intercambioJugadores();
+            } else if (opcion.equalsIgnoreCase("no")) {
+                intercambio = true;
+                continue;
+            } else {
+                System.out.println("Opcion incorrecta, intentalo de nuevo");
+            }
+        }
+        transacciones.forEach(t -> {
+            System.out.println("#"+t.getJugador1()+" "+t.getJugador2());
+        });
+        Transaccion.actualizarTransacciones(transacciones);
+
         boolean salir = false;
         while (!salir) {
             System.out.println("--------------------------");
             System.out.println("Elige el equipo que desees: ");
             clubes.forEach(c -> System.out.println(c.getNombre()));
             String nombrEquipo = scanner.nextLine();
-
             if (clubes.stream().anyMatch(c -> c.getNombre().equalsIgnoreCase(nombrEquipo))) {
-                salir = true;
 
                 verDtsEquipo(nombrEquipo);
                 jugadorConvocado(nombrEquipo);
+                boolean otroEquipo = false;
+                while (!otroEquipo) {
+                    System.out.println("Quiere ver otro equipo? si/no");
+                    String preguntar = scanner.nextLine();
+                    if(preguntar.equalsIgnoreCase("si")) {
+                        otroEquipo = true;
+                    } else if (preguntar.equalsIgnoreCase("no")) {
+                        otroEquipo = true;
+                        salir = true;
+                    } else {
+                        System.out.println("Opcion incorrecta");
+                    }
+                }
             } else {
                 System.out.println("No existe el equipo");
             }
 
         }
-        Partido.cargarPartidos("partidos.txt", miembros, clubes).forEach(partido -> System.out.println(
-                partido.getEquipo1() + " VS " + partido.getEquipo2() + "\n" +
-                partido.getGanador()
-        ));
+
 
         actualizarJornada();
         actualizarMiembro();
@@ -108,7 +139,7 @@ public class Main {
         while ((line = br.readLine()) != null) {
             String[] datos = line.split(";");
             if(datos[1].equalsIgnoreCase("jugador")) {
-                miembros.add(new Jugador(datos[0], datos[1], datos[7], Integer.parseInt(datos[2]), datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), Integer.parseInt(datos[6])));
+                miembros.add(new Jugador(datos[0], datos[1], datos[7], Integer.parseInt(datos[2]), datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5])));
             } else if(datos[1].equalsIgnoreCase("entrenador")) {
                 miembros.add(new Entrenador(datos[0], datos[1], datos[2]));
             } else if(datos[1].equalsIgnoreCase("director")) {
@@ -139,17 +170,40 @@ public class Main {
         bw.close();
     }
 
-    public  static void verDtsEquipo(String nombrEquipo){
+    public static void verDtsEquipo(String nombrEquipo) throws IOException {
         clubes.stream().filter(c -> c.getNombre().equalsIgnoreCase(nombrEquipo)).forEach(e -> {
-            System.out.println("Valoracion: " + e.getValoracion());
-            e.getMiembros().stream().filter(m -> m.getCargo().equalsIgnoreCase("Director")).forEach(a -> System.out.println("Director: "+ a.getNombre()));
-            e.getMiembros().stream().filter(en -> en.getCargo().equalsIgnoreCase("entrenador")).forEach(et -> System.out.println("Entrenador: " + et.getNombre()));
-            System.out.println("--------------------");
-            System.out.println("\tJUGADORES");
-            System.out.println("--------------------");
-            e.getMiembros().stream().filter(j -> j.getCargo().equalsIgnoreCase("jugador")).forEach(jg -> System.out.println(jg.getNombre()));
-            System.out.println("Deporte: " + e.getDeporte().getNombre());
+            System.out.println("*Valoracion: " + e.getValoracion());
+            e.getMiembros().stream().filter(m -> m.getCargo().equalsIgnoreCase("Director")).forEach(a -> System.out.println("*Director: "+ a.getNombre()));
+            e.getMiembros().stream().filter(en -> en.getCargo().equalsIgnoreCase("entrenador")).forEach(et -> System.out.println("*Entrenador: " + et.getNombre()));
+            System.out.println("*Jugadores:");
+            e.getMiembros().stream().filter(j -> j.getCargo().equalsIgnoreCase("jugador")).forEach(jg -> System.out.println("\t+"+jg.getNombre()));
+            System.out.println("*Deporte: " + e.getDeporte().getNombre());
         });
+        System.out.println("*Ultimo cambio de miembro:");
+        Transaccion cambio = Transaccion.buscarTransaccion(nombrEquipo, miembros, clubes);
+        if(cambio != null) {
+            System.out.println("~"+cambio.getJugador1().getNombre()+" del equipo "+cambio.getJugador1().getEquipo()
+                    +" -> "+cambio.getJugador2().getNombre()+" del equipo "+cambio.getJugador2().getEquipo());
+        } else {
+            System.out.println("No hay cambios hechos");
+        }
+        System.out.println("*Jugadores con mas sanciones");
+        Club.buscarClub(nombrEquipo, clubes)
+                .getMiembros()
+                .stream()
+                .filter(m -> m instanceof Jugador)
+                .map(m -> (Jugador) m).sorted(Comparator.comparingInt(Jugador::getSanciones).reversed())
+                .forEach(j -> {
+                    System.out.println("\t+"+j.getNombre()+" con "+j.getSanciones()+" sanciones");
+                });
+        Optional<Jugador> jugadorConMinimoValor = Club.buscarClub(nombrEquipo, clubes)
+                .getMiembros()
+                .stream()
+                .filter(m -> m instanceof Jugador)
+                .map(m -> (Jugador) m)
+                .min(Comparator.comparingInt(Jugador::getValor));
+        System.out.println("*Jugador con menos valor: "+jugadorConMinimoValor.get().getNombre()+" con un valor de "+jugadorConMinimoValor.get().getValor());
+
     }
 
     public static void jugadorConvocado(String equipo) {
@@ -163,7 +217,7 @@ public class Main {
         List<Miembro> miembrosOrdenados = ordenarMiembros(equipo);
         System.out.println("-Jugadores convocados:");
         for(int i = 0; i < numJugadores; i++) {
-            System.out.println("\t-"+miembrosOrdenados.get(i).getNombre());
+            System.out.println("\t+"+miembrosOrdenados.get(i).getNombre());
         }
     }
 
@@ -199,9 +253,9 @@ public class Main {
         boolean comprobarJugador1 = false;
         while (!comprobarJugador1) {
             System.out.println("JUGADORES EQUIPO 1:");
-            miembros.stream().filter(m -> m.getEquipo().equalsIgnoreCase(equipo1)).forEach(mi -> System.out.println(mi.getNombre()));
+            miembros.stream().filter(m -> m.getEquipo().equalsIgnoreCase(equipo1)).filter(m -> m.getCargo().equalsIgnoreCase("Jugador")).forEach(mi -> System.out.println(mi.getNombre()));
             System.out.println("Que jugado vas a cambiar del equipo "+equipo1);
-            jugador1 = Jugador.buscarJugador(scanner.nextLine(), miembros) != null ? Jugador.buscarJugador(scanner.nextLine(), miembros) : null;
+            jugador1 = Jugador.buscarJugador(scanner.nextLine(), miembros);
             if(jugador1 != null) {
                 comprobarJugador1 = true;
             } else {
@@ -211,9 +265,9 @@ public class Main {
         boolean comprobarJugador2 = false;
         while (!comprobarJugador2) {
             System.out.println("JUGADORES EQUIPO 2:");
-            miembros.stream().filter(m -> m.getEquipo().equalsIgnoreCase(equipo2)).forEach(mi -> System.out.println(mi.getNombre()));
+            miembros.stream().filter(m -> m.getEquipo().equalsIgnoreCase(equipo2)).filter(m -> m.getCargo().equalsIgnoreCase("Jugador")).forEach(mi -> System.out.println(mi.getNombre()));
             System.out.println("Que jugado vas a cambiar del equipo "+equipo2);
-            jugador2 = Jugador.buscarJugador(scanner.nextLine(), miembros) != null ? Jugador.buscarJugador(scanner.nextLine(), miembros) : null;
+            jugador2 = Jugador.buscarJugador(scanner.nextLine(), miembros);
             if(jugador2 != null) {
                 comprobarJugador2 = true;
             } else {
@@ -245,13 +299,10 @@ public class Main {
     public static void actualizarJornada() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("Jornada.txt"));
         try {
-            // Lee la línea
             String linea = br.readLine();
-
-            // Intenta convertir la línea a un entero
             int jornada = Integer.parseInt(linea) + 1;
             BufferedWriter bw = new BufferedWriter(new FileWriter("Jornada.txt"));
-            bw.write(jornada);
+            bw.write(String.valueOf(jornada));
             bw.close();
 
         } catch (NumberFormatException e) {

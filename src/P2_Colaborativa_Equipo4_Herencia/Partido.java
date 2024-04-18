@@ -78,10 +78,11 @@ public class Partido {
                         throw new Error("La cantidad de equipos en una partida no es correcto");
                     }
 
-                }
-                if(l.startsWith("#")) {
+                } else if(l.startsWith("#")) {
                     equipoGanado = l.substring(1);
-                    if (!Club.comprobarClub(equipoGanado, clubes)) {
+                    if (Club.comprobarClub(equipoGanado, clubes)) {
+                        Club.buscarClub(equipoGanado, clubes).setPartidoGanado(Club.buscarClub(equipoGanado, clubes).getPartidoGanado() + 1);
+                    } else {
                         throw new Error("No existe el equipo");
                     }
                 } else if (l.startsWith("*")) {

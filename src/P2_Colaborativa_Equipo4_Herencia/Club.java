@@ -116,4 +116,13 @@ public class Club {
         }
         return false;
     }
+
+    public static Club buscarClub(String club, List<Club> clubes) {
+        for (Club c : clubes) {
+            if (c.getNombre().equalsIgnoreCase(club)) {
+                return c;
+            }
+        }
+        return null;
+    }
 }
