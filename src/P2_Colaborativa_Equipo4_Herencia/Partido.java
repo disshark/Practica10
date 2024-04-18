@@ -46,14 +46,22 @@ public class Partido {
         return goleadores;
     }
 
+    /**
+     * Metodo para cargar los partidos de la jornada actual
+     * @param fichero
+     * @param miembros
+     * @param clubes
+     * @return ArrayList<Partido>
+     * @throws IOException
+     */
     public static ArrayList<Partido> cargarPartidos(String fichero, List<Miembro> miembros, List<Club> clubes) throws IOException {
         ArrayList<Partido> partidos = new ArrayList<>();
-        StringBuilder todosResult = new StringBuilder();
+        StringBuilder todosResult = new StringBuilder(); //Donde guarda todos los contenidos del fichero
 
-        BufferedReader br = new BufferedReader(new FileReader(fichero));
+        BufferedReader br = new BufferedReader(new FileReader(fichero));// Leer el archivo
         String line;
         while((line = br.readLine()) != null) {
-            todosResult.append(line).append("\n");
+            todosResult.append(line).append("\n");//Agregar la linea a la variable
         }
         br.close();
         String[] parrafo = todosResult.toString().split("\n\n");
@@ -65,7 +73,7 @@ public class Partido {
             HashMap<String, Integer> sancionados = new HashMap<>();
             HashMap<String, Integer> goleadores = new HashMap<>();
             for(String l : s.split("\n")) {
-                if (l.startsWith("=")) {
+                if (l.startsWith("=")) {//Sacar las lineas que empiecen por "=" para indicar que equipos han jugado
                     String[] equipos = l.substring(1).split(";");
                     if (equipos.length == 2) {
                         if (Club.comprobarClub(equipos[0], clubes) && Club.comprobarClub(equipos[1], clubes)) {
@@ -78,14 +86,14 @@ public class Partido {
                         throw new Error("La cantidad de equipos en una partida no es correcto");
                     }
 
-                } else if(l.startsWith("#")) {
+                } else if(l.startsWith("#")) {//Sacar las lineas que empiecen por "#" para indicar el equipo que ha ganado
                     equipoGanado = l.substring(1);
                     if (Club.comprobarClub(equipoGanado, clubes)) {
                         Club.buscarClub(equipoGanado, clubes).setPartidoGanado(Club.buscarClub(equipoGanado, clubes).getPartidoGanado() + 1);
                     } else {
                         throw new Error("No existe el equipo");
                     }
-                } else if (l.startsWith("*")) {
+                } else if (l.startsWith("*")) {//Sacar las lineas que empiecen por "*" para indicar el jugador que ha sido sancionados
                     String[] datos = l.substring(1).split(";");
                     sancionados.put(datos[0], Integer.parseInt(datos[1]));
                     Jugador jugador = Jugador.buscarJugador(datos[0], miembros);
@@ -94,7 +102,7 @@ public class Partido {
                     } else {
                         throw new Error("No existe el jugado");
                     }
-                } else if (l.startsWith("%")) {
+                } else if (l.startsWith("%")) { //Sacar las lineas que empiecen por "%" para indicar el jugador que ha marcado
                     String[] datos = l.substring(1).split(";");
                     goleadores.put(datos[0], Integer.parseInt(datos[1]));
                     Jugador jugador = Jugador.buscarJugador(datos[0], miembros);

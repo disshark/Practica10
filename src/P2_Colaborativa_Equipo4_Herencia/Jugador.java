@@ -54,9 +54,22 @@ public class Jugador extends Miembro{
         this.valor = valor;
     }
 
+    /**
+     * Metodo para calcular el valor del jugador
+     * @param tantos
+     * @param sanciones
+     * @return valor
+     */
     public static int calcularValor(int tantos, int sanciones) {
         return (tantos * 1000) - (sanciones * 500);
     }
+
+    /**
+     * Metyodo para buscar un jugador
+     * @param nombre
+     * @param miembros
+     * @return jugador
+     */
     public static Jugador buscarJugador(String nombre, List<Miembro> miembros) {
         for(Miembro m : miembros) {
             if(m.getNombre().equalsIgnoreCase(nombre) && m instanceof Jugador) {

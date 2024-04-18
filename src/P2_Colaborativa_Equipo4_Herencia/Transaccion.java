@@ -20,6 +20,11 @@ public class Transaccion {
         return jugador2;
     }
 
+    /**
+     * Metodo para actualizar las transacciones
+     * @param transacciones
+     * @throws IOException
+     */
     public static void actualizarTransacciones(List<Transaccion> transacciones) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter("Transacciones.txt", true));
         if(!transacciones.isEmpty()) {
@@ -30,15 +35,23 @@ public class Transaccion {
         bw.close();
     }
 
+    /**
+     * Metodo para buscar transacciones
+     * @param club
+     * @param miembros
+     * @param clubes
+     * @return transaccion
+     * @throws IOException
+     */
     public static Transaccion buscarTransaccion(String club, List<Miembro> miembros, List<Club> clubes) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("Transacciones.txt"));
-        StringBuilder historial = new StringBuilder();
+        StringBuilder historial = new StringBuilder(); //Variable donde guarda todos los historiales de las transacciones
         String line;
         while ((line = br.readLine()) != null) {
-            historial.append(line).append("\n");
+            historial.append(line).append("\n"); //Agregar datos a historial
         }
         br.close();
-        if (!historial.isEmpty()) {
+        if (!historial.isEmpty()) { //Comprobar si el historial esta vacio
             String[] datos = historial.toString().split("\n");
             for(int i = datos.length; i > 0; i--) {
                 String[] dato = datos[i - 1].split(";");

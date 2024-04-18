@@ -60,6 +60,13 @@ public class Club {
         this.partidoGanado = partidoGanado;
     }
 
+    /**
+     * Metodo para cargar los clubes
+     * @param fichero
+     * @param miembros
+     * @return clubes
+     * @throws IOException
+     */
     public static ArrayList<Club> cargarClubes(String fichero, List<Miembro> miembros) throws IOException {
         ArrayList<Club> clubes = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(fichero));
@@ -74,6 +81,12 @@ public class Club {
         return clubes;
     }
 
+    /**
+     * Metodo para aniadir los miembros del equipo
+     * @param miembros
+     * @param equipo
+     * @return miembrosEquipos
+     */
     public static ArrayList<Miembro> miembrosEquipo(List<Miembro> miembros, String equipo) {
         ArrayList<Miembro> miembrosEquipo = new ArrayList<>();
         for(Miembro m : miembros) {
@@ -84,10 +97,20 @@ public class Club {
         return miembrosEquipo;
     }
 
+    /**
+     * Metodo para saber el valor del equipo
+     * @param miembros
+     * @return valores
+     */
     public static double valoracionEquipo(ArrayList<Miembro> miembros) {
         return miembros.stream().filter(m -> m.getCargo().equalsIgnoreCase("jugador")).mapToDouble(m -> ((Jugador) m).getValor()).sum();
     }
 
+    /**
+     * Metodo para buscar un deporte
+     * @param deporte
+     * @return deporte
+     */
     public static Deporte buscarDeporte(String deporte) {
         for(Deporte d : deportes) {
             if(deporte.equalsIgnoreCase(d.getNombre())) {
@@ -97,6 +120,12 @@ public class Club {
         return null;
     }
 
+    /**
+     * Metodo para comprobar si existe el equipo
+     * @param club
+     * @param clubes
+     * @return boolean
+     */
     public static boolean comprobarClub(String club, List<Club> clubes) {
         for (Club c : clubes) {
             if (c.getNombre().equalsIgnoreCase(club)) {
@@ -106,6 +135,12 @@ public class Club {
         return false;
     }
 
+    /**
+     * Metodo para buscar el club
+     * @param club
+     * @param clubes
+     * @return club
+     */
     public static Club buscarClub(String club, List<Club> clubes) {
         for (Club c : clubes) {
             if (c.getNombre().equalsIgnoreCase(club)) {
@@ -115,6 +150,11 @@ public class Club {
         return null;
     }
 
+    /**
+     * Metodo para actualizar los datos del club
+     * @param clubes
+     * @throws IOException
+     */
     public static void actualizarClub(List<Club> clubes) throws IOException {
         if (clubes.isEmpty()) {
             System.out.println("La lista de clubes está vacía.");
