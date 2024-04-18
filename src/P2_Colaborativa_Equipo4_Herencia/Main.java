@@ -96,30 +96,24 @@ public class Main {
         actualizarJornada();
         actualizarMiembro();
         actualizarRanking();
+        Club.actualizarClub(clubes);
     }
 
     public static void actualizarRanking() throws IOException {
         List<Club> clubsOrdenados = ordenarClubs();
-        int rankingVoley = 1;
-        int rankingSepak = 1;
-        int rankingRugby = 1;
         BufferedWriter bw = new BufferedWriter(new FileWriter("NavesLiga.txt"));
-        try (bw) {
-           for (Club c : clubsOrdenados) {
-               if(c.getDeporte().getNombre().equalsIgnoreCase("voleibol")) {
-                   c.setRanking(rankingVoley);
-                   rankingVoley++;
-               } else if (c.getDeporte().getNombre().equalsIgnoreCase("Sepak Takraw")) {
-                   c.setRanking(rankingSepak);
-                   rankingSepak++;
-               } else {
-                   c.setRanking(rankingRugby);
-                   rankingRugby++;
-               }
-               bw.write("#" + c.getDeporte().getNombre());
-               bw.write(c.getNombre() + ";" + c.getRanking());
-           }
+        for (Deporte d : Club.deportes) {
+            int ranking = 1;
+            bw.write("------------------"+d.getNombre()+"------------------\n");
+            for (Club c : clubsOrdenados) {
+                if(c.getDeporte().getNombre().equalsIgnoreCase(d.getNombre())) {
+                    c.setRanking(ranking);
+                    ranking++;
+                    bw.write(c.getRanking()+";"+c.getNombre()+"\n");
+                }
+            }
         }
+        bw.close();
     }
 
 

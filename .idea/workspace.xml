@@ -4,20 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d002959-45c4-47b1-a337-5c6cc220f53a" name="Changes" comment="Error de imprimir director y entrenador">
-      <change afterPath="$PROJECT_DIR$/Transacciones.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="3d002959-45c4-47b1-a337-5c6cc220f53a" name="Changes" comment="save">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Jornada.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Jornada.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Miembros.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Miembros.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NavesLiga.txt" beforeDir="false" afterPath="$PROJECT_DIR$/NavesLiga.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Club.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Club.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Jugador.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Jugador.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Club.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Club.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Partido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Partido.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Transaccion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Transaccion.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,12 +123,20 @@
       <option name="project" value="LOCAL" />
       <updated>1713390228025</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="save">
+      <option name="closed" value="true" />
+      <created>1713400099231</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1713400099231</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="save" />
     <MESSAGE value="Error de imprimir director y entrenador" />
-    <option name="LAST_COMMIT_MESSAGE" value="Error de imprimir director y entrenador" />
+    <MESSAGE value="save" />
+    <option name="LAST_COMMIT_MESSAGE" value="save" />
   </component>
 </project>

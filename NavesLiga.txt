@@ -1,1 +1,9 @@
-#Sepak TakrawTiger Strikers;1#VoleibolLightning Smashers;1#Sepak TakrawTeam Dragon Blaze;2#VoleibolPhoenix Flyers;2#Rugby SubacuaticoThunder Twisters;1#Rugby SubacuaticoRising Phoenix;2
+------------------Sepak Takraw------------------
+1;Tiger Strikers
+2;Team Dragon Blaze
+------------------Voleibol------------------
+1;Lightning Smashers
+2;Phoenix Flyers
+------------------Rugby Subacuatico------------------
+1;Thunder Twisters
+2;Rising Phoenix

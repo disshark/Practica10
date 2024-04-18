@@ -1,8 +1,6 @@
 package P2_Colaborativa_Equipo4_Herencia;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -124,5 +122,21 @@ public class Club {
             }
         }
         return null;
+    }
+
+    public static void actualizarClub(List<Club> clubes) throws IOException {
+        if (clubes.isEmpty()) {
+            System.out.println("La lista de clubes está vacía.");
+            return;
+        }
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("Club.txt"))) {
+            for (Club c : clubes) {
+                bw.write(c.getDeporte().getNombre() + ";" + c.getNombre() + ";" + c.getRanking() + ";" + c.getPartidoGanado() + "\n");
+            }
+        } catch (IOException e) {
+            System.err.println("Error al escribir en el archivo Club.txt: " + e.getMessage());
+            throw e;
+        }
     }
 }
