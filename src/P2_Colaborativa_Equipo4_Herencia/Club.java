@@ -48,15 +48,6 @@ public class Club {
     public int getRanking() {
         return ranking;
     }
-
-    public void setMiembros(ArrayList<Miembro> miembros) {
-        this.miembros = miembros;
-    }
-
-    public void setValoracion(double valoracion) {
-        this.valoracion = valoracion;
-    }
-
     public void setRanking(int ranking) {
         this.ranking = ranking;
     }

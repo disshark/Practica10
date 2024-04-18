@@ -22,10 +22,6 @@ public class Jugador extends Miembro{
         return dorsal;
     }
 
-    public void setDorsal(int dorsal) {
-        this.dorsal = dorsal;
-    }
-
     public String getPosicion() {
         return posicion;
     }

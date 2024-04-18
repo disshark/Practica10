@@ -7,10 +7,4 @@ public class Entrenador extends Miembro{
         super(nombre, cargo, equipo);
     }
 
-    public static ArrayList<Jugador> jugadorTitular() {
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-
-
-        return jugadores;
-    }
 }
