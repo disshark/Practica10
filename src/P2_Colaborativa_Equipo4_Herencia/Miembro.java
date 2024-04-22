@@ -1,6 +1,6 @@
 package P2_Colaborativa_Equipo4_Herencia;
 
-public class Miembro {
+public abstract class Miembro {
     private String nombre;
     private String cargo;
     private String equipo;

@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d002959-45c4-47b1-a337-5c6cc220f53a" name="Changes" comment="comentar" />
+    <list default="true" id="3d002959-45c4-47b1-a337-5c6cc220f53a" name="Changes" comment="s">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Club.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Club.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Director.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Director.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Miembro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Miembro.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,6 +52,7 @@
     <attachedChunks>
       <set>
         <option value="jdk-20.0.2-corretto-20.0.2.1-4caba194b151-5bc9ecd2" />
+        <option value="jdk-22-openjdk-22-3183f394aec4-bad0321e" />
       </set>
     </attachedChunks>
   </component>
@@ -163,7 +169,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713458391003</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="s">
+      <option name="closed" value="true" />
+      <created>1713793139931</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1713793139931</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -172,6 +186,7 @@
     <MESSAGE value="save" />
     <MESSAGE value="control de error" />
     <MESSAGE value="comentar" />
-    <option name="LAST_COMMIT_MESSAGE" value="comentar" />
+    <MESSAGE value="s" />
+    <option name="LAST_COMMIT_MESSAGE" value="s" />
   </component>
 </project>

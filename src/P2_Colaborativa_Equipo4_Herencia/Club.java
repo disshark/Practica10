@@ -19,14 +19,16 @@ public class Club {
     private double valoracion;
     private int ranking;
     private int partidoGanado;
+    private int presupuesto;
 
-    public Club(String nombre, ArrayList<Miembro> miembros, Deporte deporte, double valoracion, int ranking, int partidoGanado) {
+    public Club(String nombre, ArrayList<Miembro> miembros, Deporte deporte, double valoracion, int ranking, int partidoGanado, int presupuesto) {
         this.nombre = nombre;
         this.miembros = miembros;
         this.deporte = deporte;
         this.valoracion = valoracion;
         this.ranking = ranking;
         this.partidoGanado = partidoGanado;
+        this.presupuesto = presupuesto;
     }
 
     public String getNombre() {
@@ -75,7 +77,7 @@ public class Club {
             String[] datos = line.split(";");
             clubes.add(new Club(datos[1], miembrosEquipo(miembros, datos[1]), buscarDeporte(datos[0]),
                     valoracionEquipo(miembrosEquipo(miembros, datos[1])), Integer.parseInt(datos[2]),
-                    Integer.parseInt(datos[3])));
+                    Integer.parseInt(datos[3]), Integer.parseInt(datos[4])));
         }
         br.close();
         return clubes;
