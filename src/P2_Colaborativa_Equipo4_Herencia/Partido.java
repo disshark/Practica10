@@ -1,7 +1,6 @@
 package P2_Colaborativa_Equipo4_Herencia;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;

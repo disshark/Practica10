@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d002959-45c4-47b1-a337-5c6cc220f53a" name="Changes" comment="comentar">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Club.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Club.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Jornada.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Jornada.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Miembros.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Miembros.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Transacciones.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Transacciones.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Club.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Club.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Jugador.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Jugador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Practica10/P2_Colaborativa_Equipo4_Herencia/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Club.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Club.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/P2_Colaborativa_Equipo4_Herencia/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="3d002959-45c4-47b1-a337-5c6cc220f53a" name="Changes" comment="comentar" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -166,7 +155,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713452351572</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="comentar">
+      <option name="closed" value="true" />
+      <created>1713458391003</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1713458391003</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

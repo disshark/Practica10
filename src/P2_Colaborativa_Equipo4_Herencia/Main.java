@@ -121,20 +121,6 @@ public class Main {
     }
 
     /**
-     * Metodo para cargar los datos de la liga
-     * @throws IOException
-     */
-    public  static void cargarDts() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("NavesLiga.txt"));
-        String line;
-        while ((line = br.readLine()) != null) {
-            String[] values = line.split(";");
-
-        }
-        br.close();
-    }
-
-    /**
      * Metodo para cargar los miembros
      * @param fichero
      * @throws IOException
