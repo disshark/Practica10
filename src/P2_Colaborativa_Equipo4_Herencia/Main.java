@@ -12,11 +12,12 @@ public class Main {
     public static List<Miembro> miembros = new ArrayList<>();
     private static Scanner scanner = new  Scanner(System.in);
     private static List<Transaccion> transacciones = new ArrayList<>();
-
+    public static List<Bolsa> bolsas = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         cargarMiembros("Miembros.txt");//Cargar los miembros
         clubes = Club.cargarClubes("Club.txt", miembros);
+        bolsas = Bolsa.cargarBolsa();
         System.out.println("Bienvenida a la NavesLiga");
         cargarJornada();//Cargar jornada
         Club.deportes.forEach(deporte -> {//Imprimir los clubs de diferentes deportes
@@ -131,9 +132,9 @@ public class Main {
         while ((line = br.readLine()) != null) {
             String[] datos = line.split(";");
             if(datos[1].equalsIgnoreCase("jugador")) {
-                miembros.add(new Jugador(datos[0], datos[1], datos[7], Integer.parseInt(datos[2]), datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5])));
+                miembros.add(new Jugador(datos[0], datos[1], datos[7], Integer.parseInt(datos[2]), datos[3], Integer.parseInt(datos[4]), Integer.parseInt(datos[5]), datos[8]));
             } else if(datos[1].equalsIgnoreCase("entrenador")) {
-                miembros.add(new Entrenador(datos[0], datos[1], datos[2]));
+                miembros.add(new Entrenador(datos[0], datos[1], datos[2], datos[3]));
             } else if(datos[1].equalsIgnoreCase("director")) {
                 miembros.add(new Director(datos[0], datos[1], datos[2]));
             }

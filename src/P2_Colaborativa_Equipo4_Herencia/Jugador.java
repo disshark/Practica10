@@ -8,16 +8,21 @@ public class Jugador extends Miembro{
     private int tantos;
     private int sanciones;
     private int valor;
+    private String deporte;
 
-    public Jugador(String nombre, String cargo, String equipo, int dorsal, String posicion, int tantos, int sanciones) {
+    public Jugador(String nombre, String cargo, String equipo, int dorsal, String posicion, int tantos, int sanciones, String deporte) {
         super(nombre, cargo, equipo);
         this.dorsal = dorsal;
         this.posicion = posicion;
         this.tantos = tantos;
         this.sanciones = sanciones;
         this.valor = calcularValor(tantos, sanciones);
+        this.deporte = deporte;
     }
 
+    public String getDeporte() {
+        return deporte;
+    }
     public int getDorsal() {
         return dorsal;
     }
@@ -77,5 +82,10 @@ public class Jugador extends Miembro{
             }
         }
         return null;
+    }
+
+    @Override
+    public String imprimirDatos() {
+        return "+"+this.getNombre()+" "+this.getValor();
     }
 }

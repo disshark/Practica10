@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 //Asd
 
@@ -14,16 +15,16 @@ public class Club {
             new Deporte("Rugby Subacuatico", 11)
     ));
     private String nombre;
-    private ArrayList<Miembro> miembros;
-    private Deporte deporte;
+    private Director director;
+    private Map<Deporte, ArrayList<Miembro>> deporte;
     private double valoracion;
     private int ranking;
     private int partidoGanado;
     private int presupuesto;
 
-    public Club(String nombre, ArrayList<Miembro> miembros, Deporte deporte, double valoracion, int ranking, int partidoGanado, int presupuesto) {
+    public Club(String nombre, Director director, Map<Deporte, ArrayList<Miembro>> deporte, double valoracion, int ranking, int partidoGanado, int presupuesto) {
         this.nombre = nombre;
-        this.miembros = miembros;
+        this.director = director;
         this.deporte = deporte;
         this.valoracion = valoracion;
         this.ranking = ranking;
@@ -34,12 +35,7 @@ public class Club {
     public String getNombre() {
         return nombre;
     }
-
-    public ArrayList<Miembro> getMiembros() {
-        return miembros;
-    }
-
-    public Deporte getDeporte() {
+    public Map<Deporte, ArrayList<Miembro>> getDeporte() {
         return deporte;
     }
 
@@ -75,9 +71,7 @@ public class Club {
         String line;
         while((line = br.readLine()) != null) {
             String[] datos = line.split(";");
-            clubes.add(new Club(datos[1], miembrosEquipo(miembros, datos[1]), buscarDeporte(datos[0]),
-                    valoracionEquipo(miembrosEquipo(miembros, datos[1])), Integer.parseInt(datos[2]),
-                    Integer.parseInt(datos[3]), Integer.parseInt(datos[4])));
+            clubes.add(new Club(datos[0], Director.buscarDirector(miembros, datos[0]), Miembro.cogerMiembros(datos[0], miembros), valoracionEquipo(miembros), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3])));
         }
         br.close();
         return clubes;
@@ -104,7 +98,7 @@ public class Club {
      * @param miembros
      * @return valores
      */
-    public static double valoracionEquipo(ArrayList<Miembro> miembros) {
+    public static double valoracionEquipo(List<Miembro> miembros) {
         return miembros.stream().filter(m -> m.getCargo().equalsIgnoreCase("jugador")).mapToDouble(m -> ((Jugador) m).getValor()).sum();
     }
 
@@ -165,7 +159,7 @@ public class Club {
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("Club.txt"))) {
             for (Club c : clubes) {
-                bw.write(c.getDeporte().getNombre() + ";" + c.getNombre() + ";" + c.getRanking() + ";" + c.getPartidoGanado() + "\n");
+                bw.write(c.getNombre() + ";" + c.getRanking() + ";" + c.getPartidoGanado() + "\n");
             }
         } catch (IOException e) {
             System.err.println("Error al escribir en el archivo Club.txt: " + e.getMessage());
